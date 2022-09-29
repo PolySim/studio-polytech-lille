@@ -5,11 +5,21 @@ export default function HeaderView(): JSX.Element {
   return (
     <Header>
       <img src={require("./head-logo-studio.png")} alt="logo du studio" />
-      <div>A LA UNE</div>
-      <div>PHOTOS</div>
-      <div>VIDEOS</div>
-      <div>L'EQUIPE</div>
-      <div>A PROPOS</div>
+      <div>
+        <p>A LA UNE</p>
+      </div>
+      <div>
+        <p>PHOTOS</p>
+      </div>
+      <div>
+        <p>VIDEOS</p>
+      </div>
+      <div>
+        <p>L'EQUIPE</p>
+      </div>
+      <div>
+        <p>A PROPOS</p>
+      </div>
       <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
     </Header>
   );
