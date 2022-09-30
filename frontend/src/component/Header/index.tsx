@@ -4,7 +4,7 @@ import { Header } from "src/styled";
 export default function HeaderView(): JSX.Element {
   return (
     <Header>
-      {window.innerWidth > 1000 ? (
+      {window.innerWidth > 930 ? (
         <img src={require("./head-logo-studio.png")} alt="logo du studio" />
       ) : (
         <></>
@@ -24,7 +24,7 @@ export default function HeaderView(): JSX.Element {
       <div>
         <p>A PROPOS</p>
       </div>
-      {window.innerWidth > 1000 ? (
+      {window.innerWidth > 930 ? (
         <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
       ) : (
         <div>

@@ -40,7 +40,7 @@ export const Header = styled.header`
     }
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 930px) {
     color: #337ab7;
 
     > div {
@@ -88,7 +88,7 @@ export const Footer = styled.footer`
     color: white;
   }
 
-  @media screen and (max-width: 1000px) {
+  @media screen and (max-width: 930px) {
     flex-direction: column;
     align-items: flex-start;
     box-sizing: border-box;
@@ -178,7 +178,7 @@ export const ImageHome = styled.div`
   }
 `;
 
-export const Connection = styled.div`
+export const NavBar = styled.div`
   display: flex;
   width: 100%;
   height: 52px;
@@ -225,6 +225,159 @@ export const Connection = styled.div`
 
     :hover {
       color: white;
+    }
+  }
+`;
+
+export const Connection = styled.div`
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 100;
+
+  > div {
+    position: relative;
+    top: 36px;
+    left: 50%;
+    height: 330px;
+    width: min(90%, 600px);
+    background-color: white;
+    animation: connection 0.5s forwards;
+    border-radius: 6px;
+
+    /* First line for presentation */
+
+    > div:nth-of-type(1) {
+      display: flex;
+      align-items: center;
+      height: 56px;
+      border-bottom: 1px solid #e5e5e5;
+      padding: 0 15px;
+      color: #333;
+
+      h4 {
+        font-size: 18px;
+        font-weight: 500;
+      }
+
+      button {
+        background-color: none;
+        border: none;
+        margin-left: auto;
+      }
+    }
+
+    /* Second line for User's information */
+
+    > div:nth-of-type(2) {
+      height: 208px;
+      width: 100%;
+      border-bottom: 1px solid #e5e5e5;
+
+      form {
+        display: flex;
+        flex-direction: column;
+        padding: 0 15px;
+
+        div {
+          margin-top: 12px;
+          display: flex;
+          flex-direction: column;
+        }
+
+        label {
+          margin-bottom: 6px;
+          font-weight: bold;
+          font-size: 14px;
+          color: #333;
+        }
+
+        input {
+          height: 34px;
+          padding-left: 12px;
+          border-radius: 3px;
+          border: 1px solid #ccc;
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+          background-color: #e8f0fe;
+
+          :focus {
+            box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+              0 0 8px rgba(102, 175, 233, 0.6);
+            outline: none;
+            border-color: #66afe9;
+          }
+        }
+
+        label input {
+          height: auto;
+          margin: 12px 6px 0 0;
+        }
+      }
+    }
+
+    /* 3eme line for submit */
+
+    > div:nth-of-type(3) {
+      display: flex;
+      justify-content: flex-end;
+      padding: 15px;
+
+      /* Info Button */
+
+      div:nth-of-type(1) {
+        height: 20px;
+        padding: 6px 12px;
+        background-color: #5bc0de;
+        font-size: 14px;
+        color: white;
+        cursor: pointer;
+        border-radius: 4px;
+        border: 1px solid transparent;
+
+        :hover {
+          background-color: #31b0d5;
+          border-color: #269abc;
+        }
+      }
+
+      /* Cancel Button */
+
+      div:nth-of-type(2) {
+        height: 20px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: #333;
+        margin-left: 10px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+
+        :hover {
+          background-color: #e6e6e6;
+          border-color: #adadad;
+        }
+      }
+
+      /* Connection Button */
+
+      div:nth-of-type(3) {
+        height: 20px;
+        padding: 6px 12px;
+        font-size: 14px;
+        color: white;
+        margin-left: 10px;
+        cursor: pointer;
+        background-color: #337ab7;
+        border: 1px solid #2e6da4;
+        border-radius: 4px;
+
+        :hover {
+          background-color: #286090;
+          border-color: #204d74;
+        }
+      }
     }
   }
 `;
