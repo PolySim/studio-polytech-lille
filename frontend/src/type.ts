@@ -1,1 +1,3 @@
-import React from "react";
+export type HomeContextType = {
+  imageAsset: number;
+};

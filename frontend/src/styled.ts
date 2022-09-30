@@ -58,7 +58,8 @@ export const Footer = styled.footer`
 
   p {
     color: white;
-    font-size: 11px;
+    font-size: 10px;
+    font-weight: bold;
   }
 `;
 
@@ -67,6 +68,7 @@ export const Home = styled.main`
   position: relative;
   width: 100%;
   overflow-x: hidden;
+  background-color: #101010;
 
   > div:nth-of-type(1) {
     display: flex;
@@ -77,6 +79,7 @@ export const Home = styled.main`
       display: flex;
       justify-content: center;
       align-items: center;
+      z-index: 10;
       width: 100px;
       height: 100%;
 
@@ -125,7 +128,8 @@ export const Home = styled.main`
 export const ImageHome = styled.div`
   display: flex;
   width: 100%;
-  margin-bottom: 24px;
+  margin: 12px 0% 24px 0%;
+  transition: transform 0.6s;
 
   img {
     width: 100vw;
