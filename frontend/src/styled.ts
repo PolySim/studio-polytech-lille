@@ -4,6 +4,7 @@ export const Header = styled.header`
   display: flex;
   justify-content: center;
   align-items: center;
+  flex-wrap: wrap;
   width: 100%;
   height: 100px;
 
@@ -38,6 +39,23 @@ export const Header = styled.header`
       }
     }
   }
+
+  @media screen and (max-width: 1000px) {
+    color: #337ab7;
+
+    > div {
+      width: fit-content;
+      height: fit-content;
+      margin-right: 24px;
+    }
+
+    p {
+      font-weight: normal;
+      ::after {
+        display: none;
+      }
+    }
+  }
 `;
 
 export const Footer = styled.footer`
@@ -69,12 +87,25 @@ export const Footer = styled.footer`
     font-weight: bold;
     color: white;
   }
+
+  @media screen and (max-width: 1000px) {
+    flex-direction: column;
+    align-items: flex-start;
+    box-sizing: border-box;
+    padding-left: 24px;
+    padding-top: 12px;
+
+    > div {
+      margin-bottom: 12px;
+    }
+  }
 `;
 
 export const Home = styled.main`
   display: flex;
   position: relative;
   width: 100%;
+  min-height: 76vh;
   overflow-x: hidden;
   background-color: #101010;
 
@@ -144,5 +175,56 @@ export const ImageHome = styled.div`
     max-height: 85vh;
     height: auto;
     overflow: hidden;
+  }
+`;
+
+export const Connection = styled.div`
+  display: flex;
+  width: 100%;
+  height: 52px;
+  background-color: #0f1218;
+  box-sizing: border-box;
+  border: 1px solid black;
+
+  div:nth-of-type(1) {
+    display: flex;
+    align-items: center;
+    margin-left: 24px;
+    height: 100%;
+  }
+
+  div:nth-of-type(2) {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin: 0 24px 0 auto;
+    width: fit-content;
+    height: 100%;
+    color: #9d9d9d;
+    font-size: 14px;
+
+    :hover {
+      color: white;
+      cursor: pointer;
+    }
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    margin-right: 24px;
+    text-decoration: none;
+    color: #9d9d9d;
+    font-size: 14px;
+
+    ::before {
+      content: "❯";
+      font-size: 10px;
+      margin-right: 6px;
+    }
+
+    :hover {
+      color: white;
+    }
   }
 `;

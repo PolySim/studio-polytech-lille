@@ -4,7 +4,11 @@ import { Header } from "src/styled";
 export default function HeaderView(): JSX.Element {
   return (
     <Header>
-      <img src={require("./head-logo-studio.png")} alt="logo du studio" />
+      {window.innerWidth > 1000 ? (
+        <img src={require("./head-logo-studio.png")} alt="logo du studio" />
+      ) : (
+        <></>
+      )}
       <div>
         <p>A LA UNE</p>
       </div>
@@ -20,7 +24,13 @@ export default function HeaderView(): JSX.Element {
       <div>
         <p>A PROPOS</p>
       </div>
-      <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
+      {window.innerWidth > 1000 ? (
+        <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
+      ) : (
+        <div>
+          <p>PAF!</p>
+        </div>
+      )}
     </Header>
   );
 }
