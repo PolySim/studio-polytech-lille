@@ -60,6 +60,14 @@ export const Footer = styled.footer`
     color: white;
     font-size: 10px;
     font-weight: bold;
+    margin-bottom: 2px;
+  }
+
+  a {
+    text-decoration: none;
+    font-size: 10px;
+    font-weight: bold;
+    color: white;
   }
 `;
 
