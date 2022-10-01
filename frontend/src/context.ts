@@ -1,6 +1,7 @@
 import React from "react";
-import { HomeContextType } from "src/type";
+import { ConnectionContextType } from "src/type";
 
-export const HomeContext = React.createContext<HomeContextType>({
-  imageAsset: 0,
+export const ConnectionContext = React.createContext<ConnectionContextType>({
+  connection: false,
+  setConnection: () => {},
 });
