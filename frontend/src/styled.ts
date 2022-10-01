@@ -236,6 +236,8 @@ export const Connection = styled.div`
   width: 100vw;
   height: 100vh;
   z-index: 100;
+  background-color: rgba(0, 0, 0, 0.3);
+  transition: background-color 0.3s;
 
   > div {
     position: relative;
@@ -266,6 +268,10 @@ export const Connection = styled.div`
         background-color: none;
         border: none;
         margin-left: auto;
+
+        :hover {
+          cursor: pointer;
+        }
       }
     }
 
@@ -379,5 +385,23 @@ export const Connection = styled.div`
         }
       }
     }
+  }
+`;
+
+export const Circle = styled.div`
+  display: flex;
+  justify-content: center;
+  position: absolute;
+  align-items: flex-end;
+  width: 100%;
+  height: 100%;
+  padding-bottom: 48px;
+  box-sizing: border-box;
+  z-index: 100000;
+
+  svg {
+    stroke: white;
+    stroke-width: 3px;
+    opacity: 1;
   }
 `;

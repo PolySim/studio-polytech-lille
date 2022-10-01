@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { Home } from "src/styled";
+import { Home, Circle } from "src/styled";
 import ImageHomeView from "src/component/Home/Image";
+import CircleView from "src/component/Home/cercle";
 
 export default function HomeView(): JSX.Element {
   const listFourNumber: number[] = [1, 2, 3, 4];
   const [imageAsset, setImageAsset] = useState<number>(1);
 
   const onToggleClick = (add: boolean) => {
-    console.log(imageAsset);
     if (add) {
       imageAsset === 4 ? setImageAsset(1) : setImageAsset(imageAsset + 1);
     } else {
@@ -41,6 +41,15 @@ export default function HomeView(): JSX.Element {
           numeroImage={numero}
         />
       ))}
+      <Circle>
+        {listFourNumber.map((numero) => (
+          <CircleView
+            key={numero}
+            imageAsset={imageAsset}
+            numeroImage={numero}
+          />
+        ))}
+      </Circle>
     </Home>
   );
 }

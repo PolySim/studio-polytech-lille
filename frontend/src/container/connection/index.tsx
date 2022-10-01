@@ -1,13 +1,22 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Connection } from "src/styled";
+import { ConnectionContext } from "src/context";
 
 export default function ConnectionView(): JSX.Element {
+  const { setConnection } = useContext(ConnectionContext);
+
   return (
     <Connection>
       <div>
         <div>
           <h4>Connextion</h4>
-          <button>❌</button>
+          <button
+            onClick={() => {
+              setConnection(false);
+            }}
+          >
+            ❌
+          </button>
         </div>
         <div>
           <form>
@@ -33,7 +42,13 @@ export default function ConnectionView(): JSX.Element {
         </div>
         <div>
           <div>Plus d'infos</div>
-          <div>Annuler</div>
+          <div
+            onClick={() => {
+              setConnection(false);
+            }}
+          >
+            Annuler
+          </div>
           <div>Connexion</div>
         </div>
       </div>
