@@ -1,10 +1,20 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Header } from "src/styled";
 
 export default function HeaderView(): JSX.Element {
+  const [width, setWidth] = useState<number>(window.innerWidth);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+  }, [width]);
+
   return (
     <Header>
-      {window.innerWidth > 930 ? (
+      {width > 930 ? (
         <img src={require("./head-logo-studio.png")} alt="logo du studio" />
       ) : (
         <></>
@@ -24,7 +34,7 @@ export default function HeaderView(): JSX.Element {
       <div>
         <p>A PROPOS</p>
       </div>
-      {window.innerWidth > 930 ? (
+      {width > 930 ? (
         <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
       ) : (
         <div>

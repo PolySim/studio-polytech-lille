@@ -104,7 +104,7 @@ export const Footer = styled.footer`
 export const Home = styled.main`
   display: flex;
   position: relative;
-  width: 100%;
+  min-width: 100%;
   min-height: 76vh;
   overflow-x: hidden;
   background-color: #101010;
@@ -166,14 +166,21 @@ export const Home = styled.main`
 
 export const ImageHome = styled.div`
   display: flex;
-  width: 100%;
+  width: 100vw;
   margin: 12px 0% 24px 0%;
   transition: transform 0.6s;
 
-  img {
+  > div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
     width: 100vw;
+  }
+
+  img {
     max-height: 85vh;
     height: auto;
+    width: auto;
     overflow: hidden;
   }
 `;
@@ -268,10 +275,7 @@ export const Connection = styled.div`
         background-color: none;
         border: none;
         margin-left: auto;
-
-        :hover {
-          cursor: pointer;
-        }
+        cursor: pointer;
       }
     }
 
@@ -329,6 +333,7 @@ export const Connection = styled.div`
       display: flex;
       justify-content: flex-end;
       padding: 15px;
+      z-index: 100;
 
       /* Info Button */
 
@@ -397,7 +402,6 @@ export const Circle = styled.div`
   height: 100%;
   padding-bottom: 48px;
   box-sizing: border-box;
-  z-index: 100000;
 
   svg {
     stroke: white;

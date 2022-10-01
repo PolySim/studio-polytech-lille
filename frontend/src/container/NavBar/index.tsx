@@ -15,7 +15,7 @@ export default function NavBarView(): JSX.Element {
           setConnection(true);
         }}
       >
-        Connection
+        Connexion
       </div>
     </NavBar>
   );

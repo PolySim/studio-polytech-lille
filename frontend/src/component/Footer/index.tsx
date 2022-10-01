@@ -26,6 +26,7 @@ export default function FooterView(): JSX.Element {
       </div>
       <div>
         <a href="#top">Retour en haut</a>
+        <div></div>
       </div>
     </Footer>
   );
