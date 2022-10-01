@@ -1,1 +1,4 @@
-import React from "react";
+export type ConnectionContextType = {
+  connection: boolean;
+  setConnection: React.Dispatch<React.SetStateAction<boolean>>;
+};
