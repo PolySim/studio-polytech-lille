@@ -7,6 +7,7 @@ import ConnectionView from "src/container/connection";
 import { ConnectionContext } from "src/context";
 import { Routes, Route } from "react-router-dom";
 import AboutView from "src/component/About";
+import GoalView from "src/component/About/goal";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -19,6 +20,7 @@ export default function App(): JSX.Element {
         <Routes>
           <Route path="/" element={<HomeView />} />
           <Route path="/about" element={<AboutView />} />
+          <Route path="/about/goal" element={<GoalView />} />
         </Routes>
         <FooterView />
         {connection ? <ConnectionView /> : <></>}

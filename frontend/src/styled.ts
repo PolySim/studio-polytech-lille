@@ -469,13 +469,18 @@ export const About = styled.main`
         text-decoration: none;
         background-color: #337ab7;
         border-radius: 4px;
+        border: 1px solid #2e6da4;
         color: white;
         font-size: 14px;
         margin-left: auto;
 
+        :hover {
+          background-color: #286090;
+          border-color: #204d74;
+        }
+
         ::before {
           content: "❯";
-          /* font-size: 12px; */
           margin-right: 6px;
           font-weight: bold;
         }
@@ -486,5 +491,44 @@ export const About = styled.main`
   > div:nth-of-type(2) {
     margin-left: 5vw;
     margin-right: 5vw;
+  }
+`;
+
+export const Goal = styled.main`
+  min-height: calc(100vh - 232px);
+  padding: 24px 60px;
+  box-sizing: border-box;
+
+  /* Title */
+
+  > div:nth-of-type(1) {
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 24px;
+
+    h2 {
+      font-weight: normal;
+      font-size: 36px;
+      color: #333;
+      margin-right: 12px;
+    }
+
+    h4 {
+      font-weight: normal;
+      font-size: 23px;
+      color: #777;
+    }
+  }
+
+  /* Text */
+
+  > div:nth-of-type(2) {
+    color: #333;
+    font-size: 14px;
+    line-height: 20px;
+
+    p {
+      margin-bottom: 12px;
+    }
   }
 `;
