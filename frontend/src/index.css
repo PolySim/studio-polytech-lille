@@ -25,3 +25,12 @@ body {
     opacity: 1;
   }
 }
+
+@keyframes history {
+  from {
+    height: 0px;
+  }
+  to {
+    height: fit-content;
+  }
+}

@@ -532,3 +532,55 @@ export const Goal = styled.main`
     }
   }
 `;
+
+export const History = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 232px);
+  width: 100%;
+  box-sizing: border-box;
+  padding: 24px 60px;
+
+  > div {
+    /* Block History */
+
+    > div {
+      overflow: hidden;
+      /* Title */
+
+      > div:nth-of-type(1) {
+        width: 100%;
+        background-color: #f5f5f5;
+        box-sizing: border-box;
+        padding: 10px 15px;
+        border-top-left-radius: 3px;
+        border-top-right-radius: 3px;
+        border: 1px solid #ddd;
+        color: #23527c;
+        font-size: 11px;
+        line-height: 17px;
+        color: #337ab7;
+        strong {
+          font-size: 14px;
+          line-height: 20px;
+        }
+      }
+
+      /* Content */
+
+      > div:nth-of-type(2) {
+        border: 1px solid #ddd;
+        margin-bottom: 6px;
+        border-bottom-left-radius: 3px;
+        border-bottom-right-radius: 3px;
+        font-size: 14px;
+        line-height: 20px;
+        color: #333;
+        max-height: 0px;
+        overflow: hidden;
+      }
+    }
+  }
+`;
