@@ -9,7 +9,7 @@ export default function ConnectionView(): JSX.Element {
     <Connection>
       <div>
         <div>
-          <h4>Connextion</h4>
+          <h4>Connexion</h4>
           <button
             onClick={() => {
               setConnection(false);

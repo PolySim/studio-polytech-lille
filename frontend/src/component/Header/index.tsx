@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Header } from "src/styled";
 
 export default function HeaderView(): JSX.Element {
@@ -15,7 +16,9 @@ export default function HeaderView(): JSX.Element {
   return (
     <Header>
       {width > 930 ? (
-        <img src={require("./head-logo-studio.png")} alt="logo du studio" />
+        <Link to="/">
+          <img src={require("./head-logo-studio.png")} alt="logo du studio" />
+        </Link>
       ) : (
         <></>
       )}
