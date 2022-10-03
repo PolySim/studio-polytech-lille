@@ -5,6 +5,7 @@ import HomeView from "src/component/Home";
 import NavBarView from "src/container/NavBar";
 import ConnectionView from "src/container/Connection";
 import { ConnectionContext } from "src/context";
+import { Routes, Route } from "react-router-dom";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -14,7 +15,9 @@ export default function App(): JSX.Element {
       <ConnectionContext.Provider value={{ connection, setConnection }}>
         <HeaderView />
         <NavBarView />
-        <HomeView />
+        <Routes>
+          <Route path="/" element={<HomeView />} />
+        </Routes>
         <FooterView />
         {connection ? <ConnectionView /> : <></>}
       </ConnectionContext.Provider>
