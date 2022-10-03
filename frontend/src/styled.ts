@@ -25,8 +25,27 @@ export const Header = styled.header`
     :hover p::after {
       transform: scale(1);
     }
+    :hover a::after {
+      transform: scale(1);
+    }
 
     p {
+      ::after {
+        content: "";
+        display: block;
+        margin: 0 auto;
+        width: 100%;
+        height: 2px;
+        background-color: #80cef0;
+        transform: scale(0);
+        transition: transform 0.2s ease-in-out;
+      }
+    }
+
+    a {
+      text-decoration: none;
+      color: #000;
+
       ::after {
         content: "";
         display: block;
@@ -113,6 +132,8 @@ export const Home = styled.main`
     display: flex;
     position: absolute;
     height: 100%;
+
+    /* Button to change image */
 
     > div {
       display: flex;
@@ -245,6 +266,8 @@ export const Connection = styled.div`
   z-index: 100;
   background-color: rgba(0, 0, 0, 0.3);
   transition: background-color 0.3s;
+
+  /* White Block */
 
   > div {
     position: relative;
@@ -407,5 +430,61 @@ export const Circle = styled.div`
     stroke: white;
     stroke-width: 3px;
     opacity: 1;
+  }
+`;
+
+export const About = styled.main`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 232px);
+  width: 100%;
+  font-size: 24px;
+  color: #333;
+
+  /* Block */
+  > div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 25vw;
+    height: 200px;
+    border: 1px solid #ccc;
+
+    > div {
+      display: flex;
+      margin-top: 12px;
+      width: 100%;
+      box-sizing: border-box;
+      padding: 12px;
+
+      /* button Link */
+
+      a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px 12px;
+        text-decoration: none;
+        background-color: #337ab7;
+        border-radius: 4px;
+        color: white;
+        font-size: 14px;
+        margin-left: auto;
+
+        ::before {
+          content: "❯";
+          /* font-size: 12px; */
+          margin-right: 6px;
+          font-weight: bold;
+        }
+      }
+    }
+  }
+
+  > div:nth-of-type(2) {
+    margin-left: 5vw;
+    margin-right: 5vw;
   }
 `;

@@ -3,9 +3,10 @@ import HeaderView from "src/component/Header";
 import FooterView from "src/component/Footer";
 import HomeView from "src/component/Home";
 import NavBarView from "src/container/NavBar";
-import ConnectionView from "src/container/Connection";
+import ConnectionView from "src/container/connection";
 import { ConnectionContext } from "src/context";
 import { Routes, Route } from "react-router-dom";
+import AboutView from "src/component/About";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -17,6 +18,7 @@ export default function App(): JSX.Element {
         <NavBarView />
         <Routes>
           <Route path="/" element={<HomeView />} />
+          <Route path="/about" element={<AboutView />} />
         </Routes>
         <FooterView />
         {connection ? <ConnectionView /> : <></>}
