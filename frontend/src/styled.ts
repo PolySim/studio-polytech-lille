@@ -597,6 +597,7 @@ export const History = styled.main`
 
       > div:nth-of-type(2) {
         border: 1px solid #ddd;
+        border-top: none;
         margin-bottom: 6px;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
@@ -805,6 +806,51 @@ export const Team = styled.main`
     /* content */
 
     > div:nth-of-type(2) {
+      border: 1px solid #ddd;
+      border-top: none;
+      margin-bottom: 3px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333;
+      transition: max-height 0.6s;
+      overflow: hidden;
+
+      /* Person Block */
+
+      > div {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        margin: 12px;
+        padding: 12px;
+
+        /* name */
+
+        > p {
+          font-size: 10px;
+          font-weight: bold;
+          color: #f5f5f5;
+          width: fit-content;
+          margin: 0 auto 18px;
+          padding: 0px 6px;
+          background-color: #5bc0de;
+          border-radius: 3px;
+        }
+
+        /* Image */
+
+        > div:nth-of-type(1) {
+          margin: 0 auto;
+          width: fit-content;
+        }
+
+        /* Information */
+
+        > div:nth-of-type(2) {
+          margin-top: 12px;
+        }
+      }
     }
   }
 `;
