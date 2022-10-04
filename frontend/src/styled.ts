@@ -746,4 +746,22 @@ export const Contact = styled.main`
       }
     }
   }
+
+  @media screen and (max-width: 930px) {
+    > div {
+      flex-direction: column;
+      width: 80%;
+
+      > div:nth-of-type(1) {
+        width: 100%;
+      }
+      > div:nth-of-type(2) {
+        margin-left: 0;
+
+        > input {
+          background-color: #7cc4c5;
+        }
+      }
+    }
+  }
 `;

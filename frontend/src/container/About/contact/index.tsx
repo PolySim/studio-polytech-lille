@@ -55,7 +55,7 @@ export default function ContactView(): JSX.Element {
               <textarea name="message" placeholder="Message" />
             </div>
           </form>
-          <input type="submit" value="Send Message" onClick={() => {}} />
+          <input type="submit" value="Envoyer" onClick={() => {}} />
         </div>
       </div>
     </Contact>
