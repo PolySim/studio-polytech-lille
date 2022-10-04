@@ -129,7 +129,7 @@ export const Home = styled.main`
   display: flex;
   position: relative;
   min-width: 100%;
-  min-height: 76vh;
+  min-height: calc(100vh - 232px);
   overflow-x: hidden;
   background-color: #101010;
 
@@ -762,6 +762,49 @@ export const Contact = styled.main`
           background-color: #7cc4c5;
         }
       }
+    }
+  }
+`;
+
+export const Team = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 232px);
+  width: 100%;
+  padding: 24px 60px;
+  box-sizing: border-box;
+
+  > div {
+    overflow: hidden;
+    width: 85%;
+    margin-bottom: 6px;
+
+    /* Title */
+
+    > div:nth-of-type(1) {
+      width: 100%;
+      background-color: #f5f5f5;
+      padding: 10px 15px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ddd;
+      color: #23527c;
+      font-size: 13px;
+      line-height: 20px;
+      color: #337ab7;
+      cursor: pointer;
+
+      :hover {
+        color: #23527c;
+        text-decoration: underline;
+      }
+    }
+
+    /* content */
+
+    > div:nth-of-type(2) {
     }
   }
 `;

@@ -10,6 +10,7 @@ import AboutView from "src/component/About";
 import GoalView from "src/component/About/goal";
 import HistoryView from "src/component/About/history";
 import ContactView from "src/container/About/contact";
+import TeamView from "src/component/Team";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -21,6 +22,7 @@ export default function App(): JSX.Element {
         <NavBarView />
         <Routes>
           <Route path="/" element={<HomeView />} />
+          <Route path="/team" element={<TeamView />} />
           <Route path="/about" element={<AboutView />} />
           <Route path="/about/goal" element={<GoalView />} />
           <Route path="/about/history" element={<HistoryView />} />
