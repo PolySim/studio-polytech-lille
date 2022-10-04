@@ -841,8 +841,14 @@ export const Team = styled.main`
         /* Image */
 
         > div:nth-of-type(1) {
+          display: flex;
+          justify-content: center;
           margin: 0 auto;
           width: fit-content;
+
+          img {
+            max-width: 100%;
+          }
         }
 
         /* Information */
