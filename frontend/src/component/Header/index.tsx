@@ -23,16 +23,16 @@ export default function HeaderView(): JSX.Element {
         <></>
       )}
       <div>
-        <p>A LA UNE</p>
+        <Link to="/news">A LA UNE</Link>
       </div>
       <div>
-        <p>PHOTOS</p>
+        <Link to="/photos">PHOTOS</Link>
       </div>
       <div>
-        <p>VIDEOS</p>
+        <Link to="/videos">VIDEOS</Link>
       </div>
       <div>
-        <p>L'EQUIPE</p>
+        <Link to="/team">L'EQUIPE</Link>
       </div>
       <div>
         <Link to="/about">A PROPOS</Link>

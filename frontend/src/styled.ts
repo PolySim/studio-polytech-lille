@@ -129,7 +129,7 @@ export const Home = styled.main`
   display: flex;
   position: relative;
   min-width: 100%;
-  min-height: 76vh;
+  min-height: calc(100vh - 232px);
   overflow-x: hidden;
   background-color: #101010;
 
@@ -597,6 +597,7 @@ export const History = styled.main`
 
       > div:nth-of-type(2) {
         border: 1px solid #ddd;
+        border-top: none;
         margin-bottom: 6px;
         border-bottom-left-radius: 3px;
         border-bottom-right-radius: 3px;
@@ -760,6 +761,100 @@ export const Contact = styled.main`
 
         > input {
           background-color: #7cc4c5;
+        }
+      }
+    }
+  }
+`;
+
+export const Team = styled.main`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 232px);
+  width: 100%;
+  padding: 24px 60px;
+  box-sizing: border-box;
+
+  > div {
+    overflow: hidden;
+    width: 85%;
+    margin-bottom: 6px;
+
+    /* Title */
+
+    > div:nth-of-type(1) {
+      width: 100%;
+      background-color: #f5f5f5;
+      padding: 10px 15px;
+      border-top-left-radius: 3px;
+      border-top-right-radius: 3px;
+      border: 1px solid #ddd;
+      color: #23527c;
+      font-size: 13px;
+      line-height: 20px;
+      color: #337ab7;
+      cursor: pointer;
+
+      :hover {
+        color: #23527c;
+        text-decoration: underline;
+      }
+    }
+
+    /* content */
+
+    > div:nth-of-type(2) {
+      border: 1px solid #ddd;
+      border-top: none;
+      margin-bottom: 3px;
+      border-bottom-left-radius: 3px;
+      border-bottom-right-radius: 3px;
+      font-size: 14px;
+      line-height: 20px;
+      color: #333;
+      transition: max-height 0.6s;
+      overflow: hidden;
+
+      /* Person Block */
+
+      > div {
+        border: 1px solid #ddd;
+        border-radius: 3px;
+        margin: 12px;
+        padding: 12px;
+
+        /* name */
+
+        > p {
+          font-size: 10px;
+          font-weight: bold;
+          color: #f5f5f5;
+          width: fit-content;
+          margin: 0 auto 18px;
+          padding: 0px 6px;
+          background-color: #5bc0de;
+          border-radius: 3px;
+        }
+
+        /* Image */
+
+        > div:nth-of-type(1) {
+          display: flex;
+          justify-content: center;
+          margin: 0 auto;
+          width: fit-content;
+
+          img {
+            max-width: 100%;
+          }
+        }
+
+        /* Information */
+
+        > div:nth-of-type(2) {
+          margin-top: 12px;
         }
       }
     }
