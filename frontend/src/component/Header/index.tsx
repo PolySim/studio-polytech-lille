@@ -35,7 +35,7 @@ export default function HeaderView(): JSX.Element {
         <p>L'EQUIPE</p>
       </div>
       <div>
-        <p>A PROPOS</p>
+        <Link to="/about">A PROPOS</Link>
       </div>
       {width > 930 ? (
         <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
