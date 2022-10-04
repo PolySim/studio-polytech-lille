@@ -14,13 +14,11 @@ export default function HistoryView(): JSX.Element {
   const textStyle = {
     select: {
       padding: "15px",
-      maxHeight: "none",
-      //   height: "auto",
-      animation: "history 0.6s forwards",
+      maxHeight: "300px",
+      overflowY: "scroll",
     },
 
     notSelect: {
-      padding: "0px",
       maxHeight: "0px",
     },
   };

@@ -562,6 +562,13 @@ export const History = styled.main`
         font-size: 11px;
         line-height: 17px;
         color: #337ab7;
+        cursor: pointer;
+
+        :hover {
+          color: #23527c;
+          text-decoration: underline;
+        }
+
         strong {
           font-size: 14px;
           line-height: 20px;
@@ -578,7 +585,7 @@ export const History = styled.main`
         font-size: 14px;
         line-height: 20px;
         color: #333;
-        max-height: 0px;
+        transition: max-height 0.6s;
         overflow: hidden;
       }
     }
