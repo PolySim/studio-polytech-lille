@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/studio-polytech-lille/static/css/main.4e893cf2.css",
+    "main.css": "/studio-polytech-lille/static/css/main.6b8ad860.css",
     "main.js": "/studio-polytech-lille/static/js/main.073b7390.js",
     "static/media/img1.jpeg": "/studio-polytech-lille/static/media/img1.02d25a7835d449e65a7b.jpeg",
     "static/media/img3.jpeg": "/studio-polytech-lille/static/media/img3.860b0b0b036742d68d98.jpeg",
@@ -10,11 +10,11 @@
     "static/media/contact.png": "/studio-polytech-lille/static/media/contact.603cba8734033ae9fc40.png",
     "static/media/goal.png": "/studio-polytech-lille/static/media/goal.87b764636f8c99199f02.png",
     "index.html": "/studio-polytech-lille/index.html",
-    "main.4e893cf2.css.map": "/studio-polytech-lille/static/css/main.4e893cf2.css.map",
+    "main.6b8ad860.css.map": "/studio-polytech-lille/static/css/main.6b8ad860.css.map",
     "main.073b7390.js.map": "/studio-polytech-lille/static/js/main.073b7390.js.map"
   },
   "entrypoints": [
-    "static/css/main.4e893cf2.css",
+    "static/css/main.6b8ad860.css",
     "static/js/main.073b7390.js"
   ]
 }
