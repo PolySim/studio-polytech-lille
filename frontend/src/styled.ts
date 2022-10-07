@@ -25,6 +25,7 @@ export const Header = styled.header`
     :hover p::after {
       transform: scale(1);
     }
+
     :hover a::after {
       transform: scale(1);
     }
@@ -448,6 +449,7 @@ export const About = styled.main`
   color: #333;
 
   /* Block */
+
   > div {
     display: flex;
     flex-direction: column;
@@ -501,6 +503,7 @@ export const About = styled.main`
 
   @media screen and (max-width: 930px) {
     flex-direction: column;
+
     > div {
       width: 80vw;
       margin-top: 24px;
@@ -566,6 +569,7 @@ export const History = styled.main`
 
     > div {
       overflow: hidden;
+
       /* Title */
 
       > div:nth-of-type(1) {
@@ -698,6 +702,7 @@ export const Contact = styled.main`
         border: 1px solid #555555;
         width: 100%;
         height: max-content;
+
         input {
           box-sizing: border-box;
           width: 100%;
@@ -756,6 +761,7 @@ export const Contact = styled.main`
       > div:nth-of-type(1) {
         width: 100%;
       }
+
       > div:nth-of-type(2) {
         margin-left: 0;
 
@@ -791,6 +797,7 @@ export const Team = styled.main`
       border-top-left-radius: 3px;
       border-top-right-radius: 3px;
       border: 1px solid #ddd;
+      box-sizing: border-box;
       color: #23527c;
       font-size: 13px;
       line-height: 20px;
@@ -848,6 +855,7 @@ export const Team = styled.main`
 
           img {
             max-width: 100%;
+            cursor: zoom-in;
           }
         }
 
@@ -859,4 +867,25 @@ export const Team = styled.main`
       }
     }
   }
+
+  @media screen and (max-width: 930px) {
+    > div {
+      width: 95%;
+    }
+  }
+`;
+
+export const ImageTeam = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  box-sizing: border-box;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  cursor: zoom-out;
+  animation: animOpacity 0.8s forwards;
 `;

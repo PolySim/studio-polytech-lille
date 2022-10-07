@@ -25,3 +25,12 @@ body {
     opacity: 1;
   }
 }
+
+@keyframes animOpacity {
+  from {
+    opacity: 0.5;
+  }
+  to {
+    opacity: 1;
+  }
+}
