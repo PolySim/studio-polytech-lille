@@ -110,4 +110,87 @@ def getImageTeam(id=None, extension=None):
             "Dataset screen display unsuccessful...", 403)
         return response
     
-#
+# Send Album information
+
+def sqlRequestToDict_Album(sqlResult):
+    result = {}
+    for album in sqlResult:
+        if album[4] == '9':
+            
+            if str(album[3]) in result:
+                result[str(album[3])].append({
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                })
+            else:
+                result[str(album[3])] = [{
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                }]
+                
+            if str(int(album[3]) + 1) in result:
+                result[str(int(album[3]) + 1)].append({
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                })
+            else:
+                result[str(int(album[3]) + 1)] = [{
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                }]
+                
+        elif int(album[4]) < 9:
+            if str(album[3]) in result:
+                result[str(album[3])].append({
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                })
+            else:
+                result[str(album[3])] = [{
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                }]
+        else:
+            if str(int(album[3]) + 1) in result:
+                result[str(int(album[3]) + 1)].append({
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                })
+            else:
+                result[str(int(album[3]) + 1)] = [{
+                    'id' : album[0],
+                    'cover_id' : album[1],
+                    'title' : album[2]
+                }]
+    return result
+            
+
+@application.route('/albumInformation')
+def getAlbumInformation():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT id, cover_id, title, YEAR(date), MONTH(date) FROM Album WHERE published = 1;"
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToDict_Album(result))
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
