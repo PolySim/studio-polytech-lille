@@ -26,7 +26,7 @@ export default function HeaderView(): JSX.Element {
         <Link to="/news">A LA UNE</Link>
       </div>
       <div>
-        <Link to="/photos">PHOTOS</Link>
+        <Link to="/album">PHOTOS</Link>
       </div>
       <div>
         <Link to="/videos">VIDEOS</Link>

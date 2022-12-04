@@ -13,3 +13,11 @@ export type MemberType = {
   subject: string;
   id: number;
 };
+
+export type InfoAlbumType = Record<number, AlbumType[]>;
+
+export type AlbumType = {
+  id: number;
+  cover_id: number;
+  title: string;
+};

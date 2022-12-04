@@ -896,3 +896,36 @@ export const ImageTeam = styled.div`
   cursor: zoom-out;
   animation: animOpacity 0.8s forwards;
 `;
+
+export const Album = styled.main`
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  /* NavBar */
+  > div:nth-of-type(1) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    height: fit-content;
+    border-bottom: 1px solid #ccc;
+    margin-top: 24px;
+    margin-bottom: 24px;
+
+    /* Year */
+    div {
+      padding: 10px 15px;
+      font-size: 14px;
+      color: #337ab7;
+      cursor: pointer;
+
+      :hover {
+        background-color: #eee;
+        border-radius: 4px 4px 0 0;
+        border-bottom: 1px solid #ddd;
+        color: #23527c;
+      }
+    }
+  }
+`;
