@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { ImageTeam } from "src/styled";
+import { MemberType } from "src/type";
+
+const cleAPI = process.env.REACT_APP_API_URL;
 
 export default function ImageTeamView({
-  name,
+  member,
   setFullScreen,
 }: {
-  name: string;
+  member: MemberType;
   setFullScreen: React.Dispatch<React.SetStateAction<boolean>>;
 }): JSX.Element {
   const [width, setWidth] = useState<number>(window.innerWidth);
@@ -37,8 +40,8 @@ export default function ImageTeamView({
                 width: "auto",
               }
         }
-        src={require("./servan.jpeg")}
-        alt="Servan"
+        src={`${cleAPI}/imageTeam/${member.id}/${member.extension}`}
+        alt={`${member.firstName} ${member.lastName}`}
       />
     </ImageTeam>
   );

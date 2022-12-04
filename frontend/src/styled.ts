@@ -856,6 +856,9 @@ export const Team = styled.main`
           img {
             max-width: 100%;
             cursor: zoom-in;
+            width: 200px;
+            height: 200px;
+            object-fit: cover;
           }
         }
 

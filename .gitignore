@@ -30,3 +30,4 @@ web
 __pycache__
 venv
 deploy
+.env

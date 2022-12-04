@@ -1,9 +1,11 @@
 import mysql.connector
 import flask
 from flask import Flask, request, send_file, render_template
+from flask_cors import CORS
 import json
 
 application = Flask(__name__)
+CORS(application, supports_credentials=True)
 
 # test connection
 @application.route('/hello')
@@ -56,8 +58,8 @@ def sqlRequestToDict_Members(sqlResult):
     }
     result = {}
     for person in sqlResult:
-        if str(person[4]) in result:
-            result[str(person[4])].append({
+        if person[4] in result:
+            result[person[4]].append({
                 'id' : person[0],
                 'rank': rank[person[1]],
                 'lastName': person[2],
@@ -65,7 +67,7 @@ def sqlRequestToDict_Members(sqlResult):
                 'subject': person[5],
                 'extension': person[6]})
         else:
-            result[str(person[4])] = [{
+            result[person[4]] = [{
                 'id' : person[0],
                 'rank': rank[person[1]],
                 'lastName': person[2],

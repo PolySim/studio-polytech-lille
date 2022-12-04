@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Home, Circle } from "src/styled";
 import ImageHomeView from "src/component/Home/Image";
 import CircleView from "src/component/Home/cercle";
+import getInfoTeam from "src/API/getInfoTeam";
 
 export default function HomeView(): JSX.Element {
   const listFourNumber: number[] = [1, 2, 3, 4];
