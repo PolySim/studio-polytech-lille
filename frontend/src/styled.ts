@@ -813,6 +813,9 @@ export const Team = styled.main`
     /* content */
 
     > div:nth-of-type(2) {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       border: 1px solid #ddd;
       border-top: none;
       margin-bottom: 3px;
@@ -831,6 +834,7 @@ export const Team = styled.main`
         border-radius: 3px;
         margin: 12px;
         padding: 12px;
+        width: 200px;
 
         /* name */
 

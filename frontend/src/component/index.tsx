@@ -21,7 +21,7 @@ export default function App(): JSX.Element {
         <HeaderView />
         <NavBarView />
         <Routes>
-          <Route path="/" element={<HomeView />} />
+          <Route path="/*" element={<HomeView />} />
           <Route path="/team" element={<TeamView />} />
           <Route path="/about" element={<AboutView />} />
           <Route path="/about/goal" element={<GoalView />} />
