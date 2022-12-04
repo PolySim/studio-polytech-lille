@@ -899,7 +899,8 @@ export const ImageTeam = styled.div`
 
 export const Album = styled.main`
   display: flex;
-  justify-content: center;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   height: 100%;
 
@@ -924,6 +925,50 @@ export const Album = styled.main`
         background-color: #eee;
         border-radius: 4px 4px 0 0;
         border-bottom: 1px solid #ddd;
+        color: #23527c;
+      }
+    }
+  }
+
+  /* List Album */
+  > div:nth-of-type(2) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-bottom: 24px;
+
+    > div {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      max-width: 120px;
+      height: fit-content;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      margin: 12px;
+      padding: 6px;
+      transition: border 0.2s;
+
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+
+      p {
+        margin: 10px 0;
+        text-align: center;
+        font-size: 14px;
+        color: #337ab7;
+        transition: color 0.2s;
+      }
+
+      :hover {
+        border: 1px solid #23527c;
+      }
+
+      :hover p {
         color: #23527c;
       }
     }
