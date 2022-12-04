@@ -12,7 +12,7 @@ CORS(application, supports_credentials=True)
 def helloWorld():
     return "Hello World"
 
-# Send Image with his get in params
+# Send Image with his id get in params
 @application.route('/getImage/<num>')
 def sendImage(num=None):
     try:
@@ -111,7 +111,6 @@ def getImageTeam(id=None, extension=None):
         return response
     
 # Send Album information
-
 def sqlRequestToDict_Album(sqlResult):
     result = {}
     for album in sqlResult:
@@ -171,7 +170,6 @@ def sqlRequestToDict_Album(sqlResult):
                 }]
     return result
             
-
 @application.route('/albumInformation')
 def getAlbumInformation():
     try:
@@ -194,3 +192,37 @@ def getAlbumInformation():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+# Send list Images from one album
+def sqlRequestToList_AlbumImage(sqlResult):
+    result = []
+    for image in sqlResult:
+        result.append({
+            'id' : image[0],
+            'secure': image[1]
+        })
+    return result
+
+@application.route('/albumImage/<id>')
+def getAlbumImages(id:None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT id, secure FROM Photo WHERE album_id = %s;"
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToList_AlbumImage(result))
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
