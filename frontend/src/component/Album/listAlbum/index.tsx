@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { AlbumType } from "src/type";
 
 const cleAPI = process.env.REACT_APP_API_URL;
@@ -10,12 +11,19 @@ export default function ListAlbumView({
 }): JSX.Element {
   return (
     <div>
-      {listAlbum.map((album) => (
-        <div key={album.id}>
-          <img src={`${cleAPI}/getImage/${album.cover_id}`} alt={album.title} />
-          <p>{album.title}</p>
-        </div>
-      ))}
+      {listAlbum ? (
+        listAlbum.map((album) => (
+          <Link to={`/album/${album.id}`} key={album.id}>
+            <img
+              src={`${cleAPI}/getImage/${album.cover_id}`}
+              alt={album.title}
+            />
+            <p>{album.title}</p>
+          </Link>
+        ))
+      ) : (
+        <></>
+      )}
     </div>
   );
 }

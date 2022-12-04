@@ -937,7 +937,8 @@ export const Album = styled.main`
     width: 85%;
     margin-bottom: 24px;
 
-    > div {
+    /* Album */
+    > a {
       display: flex;
       flex-direction: column;
       justify-content: center;
@@ -949,6 +950,9 @@ export const Album = styled.main`
       margin: 12px;
       padding: 6px;
       transition: border 0.2s;
+      cursor: pointer;
+      text-decoration: none;
+      color: #000;
 
       img {
         width: 120px;
@@ -966,11 +970,151 @@ export const Album = styled.main`
 
       :hover {
         border: 1px solid #23527c;
+        text-decoration: underline;
       }
 
       :hover p {
         color: #23527c;
       }
+    }
+  }
+`;
+
+export const AlbumSelect = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > div:nth-of-type(1) {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding-left: 12px;
+    width: 85%;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #7cc4c5;
+
+    > div:nth-of-type(1) {
+      font-size: 36px;
+      color: #333;
+      margin-right: 12px;
+    }
+    > div:nth-of-type(2) {
+      height: 100%;
+      font-size: 19px;
+      color: #999;
+    }
+  }
+`;
+
+export const ListImage = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  width: 85%;
+
+  > div {
+    padding: 3px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    margin: 20px 12px;
+    cursor: pointer;
+    transition: border 0.2s;
+
+    :hover {
+      border: 1px solid #23527c;
+    }
+
+    > img {
+      width: 120px;
+      height: 120px;
+      object-fit: cover;
+    }
+  }
+`;
+
+export const BigImage = styled.div`
+  display: flex;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  transition: transform 0.6s;
+
+  div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+    img {
+      max-width: 100vw;
+      max-height: 100vh;
+    }
+  }
+`;
+
+export const Cross = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  position: fixed;
+  top: 24px;
+  width: 100%;
+  padding-right: 24px;
+  z-index: 1000;
+
+  div {
+    cursor: pointer;
+
+    :hover svg {
+      color: #fff;
+      fill: #fff;
+    }
+  }
+`;
+
+export const Arrow = styled.div`
+  display: flex;
+  position: fixed;
+  top: 0px;
+  height: 100vh;
+  width: 100vw;
+
+  button {
+    display: flex;
+    align-items: center;
+    background-color: transparent;
+    border: none;
+    height: 100vh;
+    width: 50vw;
+
+    > div {
+      display: flex;
+      align-items: center;
+      cursor: pointer;
+      height: 100%;
+      z-index: 100;
+    }
+  }
+
+  button:nth-of-type(2) {
+    justify-content: right;
+    svg {
+      transform: rotate(180deg);
+    }
+  }
+
+  svg {
+    color: #ddd;
+    fill: #ddd;
+
+    :hover {
+      color: #fff;
+      fill: #fff;
     }
   }
 `;

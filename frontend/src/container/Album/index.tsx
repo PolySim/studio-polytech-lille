@@ -10,6 +10,7 @@ export default function AlbumView(): JSX.Element {
   const [albumSelected, setAlbumSelected] = useState<string>("");
 
   useEffect(() => {
+    console.log(2);
     async function getData() {
       const result = await getInfoAlbum();
       setAlbums((curr) => result);
@@ -17,6 +18,7 @@ export default function AlbumView(): JSX.Element {
         setAlbumSelected((curr) => Object.keys(result).reverse()[0]);
       }
     }
+
     getData();
   }, []);
   return (

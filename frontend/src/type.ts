@@ -21,3 +21,11 @@ export type AlbumType = {
   cover_id: number;
   title: string;
 };
+
+export type ListImageType = {
+  album: [string, string];
+  images: {
+    id: number;
+    secure: number;
+  }[];
+};

@@ -23,7 +23,6 @@ export default function TeamView(): JSX.Element {
     async function getData() {
       const data = await getInfoTeam();
       setMembers((curr) => data);
-      console.log(Object.entries(data));
     }
 
     getData();

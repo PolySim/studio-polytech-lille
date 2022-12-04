@@ -211,7 +211,13 @@ def getAlbumImages(id:None):
         request = "SELECT id, secure FROM Photo WHERE album_id = %s;"
         cursor.execute(request, (id,))
         result = cursor.fetchall()
-        return flask.jsonify(sqlRequestToList_AlbumImage(result))
+        requestTitleView = "SELECT title, SUM(nbViews) FROM Album JOIN Photo ON Album.id = Photo.album_id WHERE Album.id = %s;"
+        cursor.execute(requestTitleView, (id,))
+        resultTitleView = cursor.fetchall()
+        return flask.jsonify({
+            'album' : resultTitleView[0],
+            'images': sqlRequestToList_AlbumImage(result)
+        })
         
     except Exception as e:
         print(f"Failed with message: {str(e)}")
