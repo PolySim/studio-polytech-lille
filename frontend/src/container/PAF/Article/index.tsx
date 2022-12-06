@@ -34,10 +34,15 @@ export default function ArticleView(): JSX.Element {
 
       {article.extension === "" ? (
         <></>
-      ) : (
+      ) : window.innerWidth < 930 ? (
         <iframe
           title={`${article.name}`}
           src={`${cleAPI}/pafArticle/${id}/${article.extension}#view=fitH&navpanes=0`}
+        ></iframe>
+      ) : (
+        <iframe
+          title={`${article.name}`}
+          src={`${cleAPI}/pafArticle/${id}/${article.extension}#view=fitF&navpanes=0`}
         ></iframe>
       )}
     </PAFArticle>
