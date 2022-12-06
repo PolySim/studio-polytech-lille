@@ -232,3 +232,42 @@ def getAlbumImages(id:None):
             connection.close()
             print("MySQL connection is closed")
 
+#Send PAF information
+def sqlRequestToList_PafInfo(sqlResult):
+    result = []
+    for article in sqlResult:
+        result.append({
+            'id': article[5],
+            'name': article[0],
+            'date': str(article[1]) + '/' + str(article[2]) + '/' + str(article[3]),
+            'extension': str(article[4])
+        })
+    return result
+
+@application.route('/pafInfo')
+def getInfoPAF():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT name, DAY(date),MONTH(date),YEAR(date), extensionImage, id FROM Journal ORDER BY date DESC"
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToList_PafInfo(result))
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+#Send PAF Image
+@application.route('/pafImage/<id>/<extension>')
+def getPafImage(id:None, extension:None):
+    return send_file('web/img/PAF/' + id + '.' + extension)

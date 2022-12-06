@@ -29,3 +29,10 @@ export type ListImageType = {
     secure: number;
   }[];
 };
+
+export type PafInfoType = {
+  id: number;
+  name: string;
+  date: string;
+  extension: string;
+}[];

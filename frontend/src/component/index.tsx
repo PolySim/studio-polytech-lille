@@ -13,6 +13,7 @@ import ContactView from "src/container/About/contact";
 import TeamView from "src/component/Team";
 import AlbumView from "src/container/Album";
 import ListImageView from "src/component/Image";
+import PafView from "src/container/PAF";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -28,6 +29,7 @@ export default function App(): JSX.Element {
           <Route path="/about" element={<AboutView />} />
           <Route path="/album" element={<AlbumView />} />
           <Route path="/album/:id" element={<ListImageView />} />
+          <Route path="/paf" element={<PafView />} />
           <Route path="/about/goal" element={<GoalView />} />
           <Route path="/about/history" element={<HistoryView />} />
           <Route path="/about/contact" element={<ContactView />} />
