@@ -271,3 +271,36 @@ def getInfoPAF():
 @application.route('/pafImage/<id>/<extension>')
 def getPafImage(id:None, extension:None):
     return send_file('web/img/PAF/' + id + '.' + extension)
+
+#Send PAF information for One article
+@application.route('/pafArticleInfo/<id>')
+def getArticleInfoPaf(id:None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT name, views, extensionFile FROM Journal WHERE id = %s"
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return flask.jsonify({
+            'name': result[0][0],
+            'views': result[0][1],
+            'extension': result[0][2]
+        })
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+#Send PAF Article 
+@application.route('/pafArticle/<id>/<extension>')
+def getArticlePaf(id:None, extension:None):
+    return send_file('web/file/PAF/' + id + '.' + extension)

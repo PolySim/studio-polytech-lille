@@ -1,5 +1,6 @@
 import React from "react";
 import { PafInfoType } from "src/type";
+import { Link } from "react-router-dom";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -11,7 +12,7 @@ export default function ListArticleView({
   return (
     <div>
       {pafArticle.map((article) => (
-        <div key={article.name}>
+        <Link to={`/paf/${article.id}`} key={article.name}>
           <img
             src={`${cleAPI}/pafImage/${article.id}/${article.extension}`}
             alt={article.name}
@@ -20,7 +21,7 @@ export default function ListArticleView({
             <p>{article.name}</p>
             <p> {article.date}</p>
           </div>
-        </div>
+        </Link>
       ))}
     </div>
   );

@@ -36,3 +36,9 @@ export type PafInfoType = {
   date: string;
   extension: string;
 }[];
+
+export type PafArticleInfoType = {
+  name: string;
+  extension: string;
+  views: number;
+};

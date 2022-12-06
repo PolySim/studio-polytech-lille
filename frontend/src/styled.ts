@@ -1146,7 +1146,7 @@ export const PAF = styled.main`
     justify-content: center;
     margin-bottom: 24px;
 
-    > div {
+    > a {
       padding: 3px;
       border: 1px solid #ddd;
       border-radius: 4px;
@@ -1155,6 +1155,7 @@ export const PAF = styled.main`
       height: fit-content;
       cursor: pointer;
       transition: border 0.2s;
+      text-decoration: none;
 
       :hover {
         border: 1px solid #23527c;
@@ -1188,5 +1189,40 @@ export const PAF = styled.main`
         }
       }
     }
+  }
+`;
+
+export const PAFArticle = styled.main`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 48px;
+
+  > div {
+    display: flex;
+    align-items: flex-end;
+    flex-wrap: wrap;
+    padding-left: 12px;
+    width: 85%;
+    margin-top: 12px;
+    margin-bottom: 24px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #7cc4c5;
+
+    > div:nth-of-type(1) {
+      font-size: 36px;
+      color: #333;
+      margin-right: 12px;
+    }
+    > div:nth-of-type(2) {
+      height: 100%;
+      font-size: 19px;
+      color: #999;
+    }
+  }
+
+  iframe {
+    height: 90vh;
+    width: 85vw;
   }
 `;
