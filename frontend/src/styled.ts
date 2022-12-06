@@ -1226,3 +1226,43 @@ export const PAFArticle = styled.main`
     width: 85vw;
   }
 `;
+
+export const ListVideo = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  > div:nth-of-type(1) {
+    display: flex;
+    width: 85%;
+    margin: 12px 0;
+
+    > div:nth-of-type(1) {
+      display: flex;
+      flex-wrap: wrap;
+
+      div {
+        display: flex;
+        align-items: center;
+        box-sizing: border-box;
+        height: 42px;
+        padding: 10px 15px;
+        font-size: 14px;
+        color: #337ab7;
+        border-bottom: 1px solid #ccc;
+
+        :hover {
+          background-color: #ddd;
+          border-radius: 4px 4px 0 0;
+          color: #23527c;
+        }
+      }
+    }
+
+    > div:nth-of-type(2) {
+    }
+  }
+
+  > div:nth-of-type(2) {
+  }
+`;

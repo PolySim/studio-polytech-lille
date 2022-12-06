@@ -42,3 +42,9 @@ export type PafArticleInfoType = {
   extension: string;
   views: number;
 };
+
+export type VideoCategoryType = {
+  id: number;
+  name: string;
+  position: number;
+}[];

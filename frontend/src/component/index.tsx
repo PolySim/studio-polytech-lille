@@ -15,6 +15,7 @@ import AlbumView from "src/container/Album";
 import ListImageView from "src/component/Image";
 import PafView from "src/container/PAF";
 import ArticleView from "src/container/PAF/Article";
+import ListVideoView from "src/container/Video";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -30,6 +31,7 @@ export default function App(): JSX.Element {
           <Route path="/about" element={<AboutView />} />
           <Route path="/album" element={<AlbumView />} />
           <Route path="/album/:id" element={<ListImageView />} />
+          <Route path="/videos" element={<ListVideoView />} />
           <Route path="/paf" element={<PafView />} />
           <Route path="/paf/:id" element={<ArticleView />} />
           <Route path="/about/goal" element={<GoalView />} />

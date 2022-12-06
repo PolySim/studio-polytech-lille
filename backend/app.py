@@ -114,7 +114,7 @@ def getImageTeam(id=None, extension=None):
 def sqlRequestToDict_Album(sqlResult):
     result = {}
     for album in sqlResult:
-        if album[4] == '9':
+        if album[4] == '8':
             
             if str(album[3]) in result:
                 result[str(album[3])].append({
@@ -142,7 +142,7 @@ def sqlRequestToDict_Album(sqlResult):
                     'title' : album[2]
                 }]
                 
-        elif int(album[4]) < 9:
+        elif int(album[4]) < 8:
             if str(album[3]) in result:
                 result[str(album[3])].append({
                     'id' : album[0],
@@ -304,3 +304,41 @@ def getArticleInfoPaf(id:None):
 @application.route('/pafArticle/<id>/<extension>')
 def getArticlePaf(id:None, extension:None):
     return send_file('web/file/PAF/' + id + '.' + extension)
+
+#Send Video Category information 
+def sqlRequestToList_VideoCategory(sqlResult):
+    result = []
+    for category in sqlResult:
+        result.append({
+            'id': category[0],
+            'name': category[1],
+            'position': category[2]
+        })
+    return result
+
+@application.route('/videoCategory')
+def getVideoInfo():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """SELECT id, name, position
+        FROM VideoCategory
+        ORDER BY position;"""
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToList_VideoCategory(result))
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+            
