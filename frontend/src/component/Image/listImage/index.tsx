@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { ListImage } from "src/styled";
 import BigImageView from "src/component/Image/bigImage";
 import CrossView from "src/component/Image/cross";
@@ -16,6 +16,39 @@ export default function JustListImageView({
 }): JSX.Element {
   const [imageClick, setImageClick] = useState<boolean>(false);
   const [imageView, setImageView] = useState<number>(-1);
+
+  const onToggleDisplay = (add: boolean) => {
+    if (add) {
+      if (imageView === images.length - 1) {
+        setImageView((curr) => 0);
+      } else {
+        setImageView((curr) => curr + 1);
+      }
+    } else {
+      if (imageView === 0) {
+        setImageView((curr) => images.length - 1);
+      } else {
+        setImageView((curr) => curr - 1);
+      }
+    }
+  };
+
+  useEffect(() => {
+    const keyDownReset = (e: { key: string }) => {
+      if (e.key === "Escape") {
+        setImageClick(false);
+      } else if (e.key === "ArrowRight") {
+        // console.log(1);
+        onToggleDisplay(true);
+      } else if (e.key === "ArrowLeft") {
+        onToggleDisplay(false);
+      }
+    };
+    document.addEventListener("keydown", keyDownReset);
+    return () => {
+      document.removeEventListener("keydown", keyDownReset);
+    };
+  }, [imageClick, imageView]);
 
   return (
     <>

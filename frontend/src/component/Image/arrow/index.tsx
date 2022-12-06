@@ -12,7 +12,7 @@ export default function ArrowView({
 }): JSX.Element {
   const onToggleDisplay = (add: boolean) => {
     if (add) {
-      if (imageView - 1 === numberImage) {
+      if (imageView === numberImage - 1) {
         setImageView((curr) => 0);
       } else {
         setImageView((curr) => curr + 1);
