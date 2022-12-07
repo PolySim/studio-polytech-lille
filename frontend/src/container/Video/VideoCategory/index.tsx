@@ -5,9 +5,13 @@ import { VideoCategoryType } from "src/type";
 export default function VideoCategoryView({
   years,
   setYearSelected,
+  setCategorySelected,
+  categorySelected,
 }: {
   years: number[];
   setYearSelected: React.Dispatch<React.SetStateAction<number>>;
+  setCategorySelected: React.Dispatch<React.SetStateAction<number>>;
+  categorySelected: number;
 }): JSX.Element {
   const [categories, setCategories] = useState<VideoCategoryType>([]);
 
@@ -18,23 +22,43 @@ export default function VideoCategoryView({
     }
     getData();
   }, []);
+
+  const styleSelected = {
+    select: {
+      backgroundColor: "#eee",
+      border: "1px solid #ddd",
+      borderRadius: "4px 4px 0 0",
+      color: "#333",
+    },
+    notSelected: {},
+  };
   return (
     <div>
       <div>
         {categories.map((category) => (
-          <div key={category.id}>{category.name}</div>
+          <div
+            key={category.id}
+            onClick={() => {
+              setCategorySelected((curr) => category.id);
+            }}
+            style={
+              categorySelected === category.id
+                ? styleSelected.select
+                : styleSelected.notSelected
+            }
+          >
+            {category.name}
+          </div>
         ))}
       </div>
       <div>
-        <select>
+        <select
+          onChange={(e) => {
+            setYearSelected(parseInt(e.target.value));
+          }}
+        >
           {years.map((year) => (
-            <option
-              key={year}
-              onClick={() => {
-                setYearSelected((curr) => year);
-              }}
-              value={year}
-            >{`${year} / ${year + 1}`}</option>
+            <option key={year} value={year}>{`${year} / ${year + 1}`}</option>
           ))}
         </select>
       </div>

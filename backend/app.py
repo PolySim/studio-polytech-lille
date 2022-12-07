@@ -420,7 +420,6 @@ def sqlRequestToDict_VideoInfo(sqlResult):
                 }]
     return result
                 
-
 @application.route('/videoInfo')
 def getVideoInfo():
     try:
@@ -446,3 +445,8 @@ def getVideoInfo():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+#Send Video Image
+@application.route('/videoImage/<id>/<extension>')
+def getVideoImage(id:None, extension:None):
+    return send_file('web/img/video/' + id + '.' + extension)

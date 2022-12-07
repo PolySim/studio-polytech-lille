@@ -1231,6 +1231,7 @@ export const ListVideo = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: calc(100vh - 232px);
 
   /* Categories and Years */
   > div:nth-of-type(1) {
@@ -1277,5 +1278,43 @@ export const ListVideo = styled.main`
 
   /* List */
   > div:nth-of-type(2) {
+    display: flex;
+    flex-wrap: wrap;
+    width: 85%;
+    margin-top: 24px;
+
+    > div {
+      padding: 3px;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      height: fit-content;
+      width: min-content;
+      margin-right: 24px;
+      transition: border-color 0.2s;
+      margin-bottom: 24px;
+      cursor: pointer;
+
+      :hover {
+        border-color: #23527c;
+      }
+
+      :hover div {
+        color: #23527c;
+      }
+      > img {
+        width: 180px;
+      }
+
+      > div {
+        margin-top: 12px;
+        margin-bottom: 6px;
+        text-align: center;
+        word-wrap: normal;
+        font-weight: bold;
+        font-size: 14px;
+        color: #337ab7;
+        transition: color 0.2s;
+      }
+    }
   }
 `;

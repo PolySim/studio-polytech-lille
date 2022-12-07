@@ -48,3 +48,14 @@ export type VideoCategoryType = {
   name: string;
   position: number;
 }[];
+
+export type VideoInfoType = Record<
+  number,
+  {
+    id: number;
+    category_id: number;
+    title: string;
+    extension: string;
+    secure: number;
+  }[]
+>;
