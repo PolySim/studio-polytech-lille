@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -15,21 +16,38 @@ export default function VideosView({
   }[];
   category: number;
 }): JSX.Element {
+  const style = {
+    width: "100%",
+    minHeight: "20px",
+    padding: "15px",
+    backgroundColor: "#d9edf7",
+    color: "#31708f",
+    border: "1px solid #bce8f1",
+    borderRadius: "4px",
+    fontSize: "14px",
+  };
+
   return (
     <div>
       {videos ? (
-        videos.map((video) =>
-          category === video.category_id ? (
-            <div key={video.id}>
-              <img
-                src={`${cleAPI}/videoImage/${video.id}/${video.extension}`}
-                alt={`${video.title}`}
-              />
-              <div>{video.title}</div>
-            </div>
-          ) : (
-            <React.Fragment key={video.id} />
+        videos.some((video) => video.category_id === category) ? (
+          videos.map((video) =>
+            category === video.category_id ? (
+              <Link to={`${video.id}`} key={video.id}>
+                <img
+                  src={`${cleAPI}/videoImage/${video.id}/${video.extension}`}
+                  alt={`${video.title}`}
+                />
+                <div>{video.title}</div>
+              </Link>
+            ) : (
+              <React.Fragment key={video.id} />
+            )
           )
+        ) : (
+          <div style={style}>
+            Pas de vidéos pour cette année et pour cette catégorie...
+          </div>
         )
       ) : (
         <></>

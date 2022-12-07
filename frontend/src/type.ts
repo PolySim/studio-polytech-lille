@@ -59,3 +59,10 @@ export type VideoInfoType = Record<
     secure: number;
   }[]
 >;
+
+export type VideoLinkType = {
+  extension: string;
+  title: string;
+  nbViews: number;
+  link: string[];
+};

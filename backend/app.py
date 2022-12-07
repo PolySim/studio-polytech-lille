@@ -450,3 +450,45 @@ def getVideoInfo():
 @application.route('/videoImage/<id>/<extension>')
 def getVideoImage(id:None, extension:None):
     return send_file('web/img/video/' + id + '.' + extension)
+
+#Send Video Link
+def sqlRequestToDict_VideoLink(sqlResult):
+    result = {}
+    for link in sqlResult:
+        if result == {}:
+            result = {
+                'extension': link[0],
+                'title' : link[1],
+                'nbViews' : link[2],
+                'link' : [link[3]]
+            }
+        else:
+            result['link'].append(link[3])
+    return result
+
+@application.route('/videoLink/<id>')
+def getVideoLink(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT extension, title, nbViews, link
+        FROM Video
+        JOIN VideoLink ON Video.id = VideoLink.video_id
+        WHERE Video.id = %s;
+        """
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToDict_VideoLink(result))
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
