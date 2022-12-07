@@ -1232,6 +1232,7 @@ export const ListVideo = styled.main`
   flex-direction: column;
   align-items: center;
 
+  /* Categories and Years */
   > div:nth-of-type(1) {
     display: flex;
     width: 85%;
@@ -1240,6 +1241,7 @@ export const ListVideo = styled.main`
     > div:nth-of-type(1) {
       display: flex;
       flex-wrap: wrap;
+      margin-right: 12px;
 
       div {
         display: flex;
@@ -1250,6 +1252,7 @@ export const ListVideo = styled.main`
         font-size: 14px;
         color: #337ab7;
         border-bottom: 1px solid #ccc;
+        cursor: pointer;
 
         :hover {
           background-color: #ddd;
@@ -1260,9 +1263,19 @@ export const ListVideo = styled.main`
     }
 
     > div:nth-of-type(2) {
+      display: flex;
+      align-items: center;
+      margin-left: auto;
+
+      select {
+        background-color: #ddd;
+        border-radius: 4px;
+        padding: 6px;
+      }
     }
   }
 
+  /* List */
   > div:nth-of-type(2) {
   }
 `;

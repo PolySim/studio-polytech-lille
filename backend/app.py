@@ -317,7 +317,7 @@ def sqlRequestToList_VideoCategory(sqlResult):
     return result
 
 @application.route('/videoCategory')
-def getVideoInfo():
+def getVideoCategories():
     try:
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
         cursor = connection.cursor()
@@ -341,4 +341,108 @@ def getVideoInfo():
             connection.close()
             print("MySQL connection is closed")
             
+#Send ALL years where there are videos
+def sqlRequestToList_VideoYear(sqlResult):
+    result = []
+    for year in sqlResult:
+        if year[0] < 9:
+            if not year[1] - 1 in result:
+                result.append(year[1] - 1)
+        else:
+            if not year[1] in result:
+                result.append(year[1])
+    return result
+
+@application.route('/yearsVideo')
+def getYearsVideo():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT DISTINCT MONTH(date), YEAR(date)
+        FROM Video
+        ORDER BY YEAR(date) DESC;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToList_VideoYear(result))
+    
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
             
+#Send Video Information
+def sqlRequestToDict_VideoInfo(sqlResult):
+    result = {}
+    for video in sqlResult:
+        if video[5] < 9:
+            if str(video[6] - 1) in result:
+                result[str(video[6] - 1)].append({
+                    'id' : video[0],
+                    'category_id' : video[1],
+                    'title' : video[2],
+                    'extension' : video[3],
+                    'secure' : video[4]
+                })
+            else:
+                result[str(video[6] - 1)] = [{
+                    'id' : video[0],
+                    'category_id' : video[1],
+                    'title' : video[2],
+                    'extension' : video[3],
+                    'secure' : video[4]
+                }]
+        else:
+            if str(video[6]) in result:
+                result[str(video[6])].append({
+                    'id' : video[0],
+                    'category_id' : video[1],
+                    'title' : video[2],
+                    'extension' : video[3],
+                    'secure' : video[4]
+                })
+            else:
+                result[str(video[6])] = [{
+                    'id' : video[0],
+                    'category_id' : video[1],
+                    'title' : video[2],
+                    'extension' : video[3],
+                    'secure' : video[4]
+                }]
+    return result
+                
+
+@application.route('/videoInfo')
+def getVideoInfo():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT id, category_id, title, extension, secure, MONTH(date), YEAR(date)
+        FROM Video;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToDict_VideoInfo(result))
+        
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
