@@ -66,3 +66,10 @@ export type VideoLinkType = {
   nbViews: number;
   link: string[];
 };
+
+export type NewsInfoType = {
+  id: number;
+  extension: string;
+  title: string;
+  text: string;
+}[];

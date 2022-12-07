@@ -1360,3 +1360,56 @@ export const Video = styled.main`
     }
   }
 `;
+
+export const News = styled.main`
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  margin-bottom: 48px;
+  min-height: calc(100vh - 280px);
+
+  > div {
+    margin-top: 24px;
+    width: 85%;
+    margin-bottom: 24px;
+
+    > div:nth-of-type(1) {
+      display: flex;
+      margin-bottom: 24px;
+
+      > div {
+        display: flex;
+        align-items: center;
+        height: 120px;
+        margin-left: 24px;
+        font-size: 36px;
+        color: #333;
+      }
+
+      img {
+        width: 120px;
+        height: 120px;
+        object-fit: cover;
+      }
+    }
+    > div:nth-of-type(2) {
+      font-size: 14px;
+      color: #333;
+      padding-left: 48px;
+      margin-bottom: 12px;
+    }
+
+    > a {
+      margin-left: 48px;
+      font-size: 14px;
+      color: #337ab7;
+      transition: color 0.2s;
+      text-decoration: none;
+
+      :hover {
+        color: #23527c;
+        text-decoration: underline;
+      }
+    }
+  }
+`;

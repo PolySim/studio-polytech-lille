@@ -492,3 +492,66 @@ def getVideoLink(id: None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+#Send News Info
+def wordWithoutStyle(text):
+    count = 0
+    word = ""
+    for letter in text:
+        if letter == '[':
+            count += 1
+        elif letter == ']':
+          count -= 1   
+        else:
+            if count == 0:
+                word += letter
+    return word
+
+def sqlRequestToList_NewsInfo(sqlResult):
+    result = []
+    for news in sqlResult:
+        textList = news[3][:430].split(" ")
+        textList.pop()
+        text = ""
+        for word in textList:
+            if '[' in word or ']' in word:
+                text += wordWithoutStyle(word) + ' '
+            else:
+                text += word + ' '
+        result.append({
+            'id': news[0],
+            'extension': news[1],
+            'title': news[2],
+            'text' : text + '...'
+        })
+    return result
+
+@application.route('/newsInfo')
+def getNewsInfo():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT id, extension, title, text
+        FROM News
+        ORDER BY date DESC;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToList_NewsInfo(result))
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+@application.route('/newsImage/<id>/<extension>')
+def getNewsImage(id: None, extension:None):
+    return send_file('web/img/news/' + id + '.' + extension)
