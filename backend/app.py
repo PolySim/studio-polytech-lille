@@ -526,6 +526,7 @@ def sqlRequestToList_NewsInfo(sqlResult):
         })
     return result
 
+#Send News Information
 @application.route('/newsInfo')
 def getNewsInfo():
     try:
@@ -555,3 +556,30 @@ def getNewsInfo():
 @application.route('/newsImage/<id>/<extension>')
 def getNewsImage(id: None, extension:None):
     return send_file('web/img/news/' + id + '.' + extension)
+
+#Send News
+@application.route('/newsText/<id>')
+def getNewsText(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT text
+        FROM News
+        WHERE id = %s;
+        """
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return result
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

@@ -22,9 +22,9 @@ export default function HeaderView(): JSX.Element {
       ) : (
         <></>
       )}
-      <div>
+      {/* <div>
         <Link to="/news">A LA UNE</Link>
-      </div>
+      </div> */}
       <div>
         <Link to="/album">PHOTOS</Link>
       </div>
