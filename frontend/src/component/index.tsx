@@ -11,6 +11,13 @@ import GoalView from "src/component/About/goal";
 import HistoryView from "src/component/About/history";
 import ContactView from "src/container/About/contact";
 import TeamView from "src/component/Team";
+import AlbumView from "src/container/Album";
+import ListImageView from "src/component/Image";
+import PafView from "src/container/PAF";
+import ArticleView from "src/container/PAF/Article";
+import ListVideoView from "src/container/Video";
+import VideoView from "src/container/Video/VideoView";
+import ListNewsView from "src/container/News";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -21,9 +28,16 @@ export default function App(): JSX.Element {
         <HeaderView />
         <NavBarView />
         <Routes>
-          <Route path="/" element={<HomeView />} />
+          <Route path="/*" element={<HomeView />} />
           <Route path="/team" element={<TeamView />} />
+          <Route path="/news" element={<ListNewsView />} />
           <Route path="/about" element={<AboutView />} />
+          <Route path="/album" element={<AlbumView />} />
+          <Route path="/album/:id" element={<ListImageView />} />
+          <Route path="/videos" element={<ListVideoView />} />
+          <Route path="/videos/:id" element={<VideoView />} />
+          <Route path="/paf" element={<PafView />} />
+          <Route path="/paf/:id" element={<ArticleView />} />
           <Route path="/about/goal" element={<GoalView />} />
           <Route path="/about/history" element={<HistoryView />} />
           <Route path="/about/contact" element={<ContactView />} />

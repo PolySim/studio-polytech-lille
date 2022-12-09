@@ -22,11 +22,11 @@ export default function HeaderView(): JSX.Element {
       ) : (
         <></>
       )}
-      <div>
+      {/* <div>
         <Link to="/news">A LA UNE</Link>
-      </div>
+      </div> */}
       <div>
-        <Link to="/photos">PHOTOS</Link>
+        <Link to="/album">PHOTOS</Link>
       </div>
       <div>
         <Link to="/videos">VIDEOS</Link>
@@ -38,10 +38,12 @@ export default function HeaderView(): JSX.Element {
         <Link to="/about">A PROPOS</Link>
       </div>
       {width > 930 ? (
-        <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
+        <Link to="/paf">
+          <img src={require("./head-logo-paf.png")} alt="logo du PAF" />
+        </Link>
       ) : (
         <div>
-          <p>PAF!</p>
+          <Link to="/paf">PAF!</Link>
         </div>
       )}
     </Header>
