@@ -7,7 +7,7 @@ import getInfoTeam from "src/API/getInfoTeam";
 const cleAPI = process.env.REACT_APP_API_URL;
 
 export default function TeamView(): JSX.Element {
-  const [years, setYears] = useState<number>(0);
+  const [years, setYears] = useState<number>(2019);
   const [fullScreen, setFullScreen] = useState<boolean>(false);
   const [members, setMembers] = useState<InfoTeamType>({});
   const [memberClick, setMemberClick] = useState<MemberType>({

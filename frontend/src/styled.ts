@@ -109,6 +109,10 @@ export const Footer = styled.footer`
     text-decoration: none;
     font-size: 11px;
     color: white;
+
+    :hover {
+      text-decoration: underline;
+    }
   }
 
   @media screen and (max-width: 930px) {
@@ -1089,6 +1093,9 @@ export const Arrow = styled.div`
     border: none;
     height: 100vh;
     width: 50vw;
+    :focus {
+      outline: none;
+    }
 
     > div {
       display: flex;
@@ -1410,6 +1417,104 @@ export const News = styled.main`
         color: #23527c;
         text-decoration: underline;
       }
+    }
+  }
+`;
+
+export const Legal = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 232px);
+
+  h2 {
+    width: 85%;
+    margin-top: 36px;
+    font-size: 36px;
+    color: #333;
+  }
+
+  h3 {
+    margin-top: 36px;
+    margin-bottom: 12px;
+    font-size: 30px;
+    color: #333;
+  }
+
+  > div {
+    width: 85%;
+    font-size: 14px;
+    color: #333;
+
+    > div {
+      > div {
+        a {
+          color: #337ab7;
+          transition: color 0.2s;
+          text-decoration: none;
+
+          :hover {
+            color: #23527c;
+            text-decoration: underline;
+          }
+        }
+      }
+
+      p {
+        margin-bottom: 12px;
+      }
+
+      > div:nth-of-type(1),
+      > div:nth-of-type(2),
+      > div:nth-of-type(3) {
+        margin-left: 12px;
+        display: flex;
+        align-items: center;
+        margin-bottom: 3px;
+
+        a {
+          font-weight: bold;
+          margin-right: 3px;
+        }
+
+        a:nth-of-type(2) {
+          font-weight: normal;
+          margin-right: 0px;
+        }
+
+        ::before {
+          content: "";
+          min-width: 6px;
+          min-height: 6px;
+          background-color: #333;
+          border-radius: 50%;
+          margin-right: 6px;
+        }
+      }
+
+      > div:nth-of-type(4),
+      > div:nth-of-type(5) {
+        margin-top: 12px;
+      }
+    }
+    > div:nth-of-type(2) {
+      margin-bottom: 6px;
+    }
+    > div:nth-of-type(3) {
+      display: flex;
+      flex-direction: column;
+      ::after {
+        content: "";
+        margin-top: 24px;
+        height: 1px;
+        width: 100%;
+        background-color: #ddd;
+      }
+    }
+    > div:nth-of-type(4) {
+      margin-top: 24px;
+      margin-bottom: 24px;
+      font-weight: bold;
     }
   }
 `;

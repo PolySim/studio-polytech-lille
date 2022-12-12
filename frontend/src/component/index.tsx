@@ -18,6 +18,7 @@ import ArticleView from "src/container/PAF/Article";
 import ListVideoView from "src/container/Video";
 import VideoView from "src/container/Video/VideoView";
 import ListNewsView from "src/container/News";
+import LegalView from "src/component/legal";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -29,6 +30,7 @@ export default function App(): JSX.Element {
         <NavBarView />
         <Routes>
           <Route path="/*" element={<HomeView />} />
+          <Route path="/legal" element={<LegalView />} />
           <Route path="/team" element={<TeamView />} />
           <Route path="/news" element={<ListNewsView />} />
           <Route path="/about" element={<AboutView />} />
