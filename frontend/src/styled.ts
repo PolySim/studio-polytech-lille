@@ -1291,6 +1291,7 @@ export const ListVideo = styled.main`
   > div:nth-of-type(2) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 85%;
     margin-top: 24px;
 
