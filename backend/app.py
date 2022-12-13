@@ -3,6 +3,9 @@ import flask
 from flask import Flask, request, send_file, render_template
 from flask_cors import CORS
 import json
+from Crypto.Util.Padding import unpad
+from Crypto.Cipher import AES
+import base64
 
 application = Flask(__name__)
 CORS(application, supports_credentials=True)
@@ -583,3 +586,20 @@ def getNewsText(id: None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+           
+           
+@application.route('/getUsername/<iv>')
+def getUsername(iv: None): 
+    u = request.args.get('u')
+    username = ''
+    for letter in u:
+        if letter == ' ':
+            username+= '+'
+        else:
+            username += letter
+    ciphertext = base64.b64decode(username)
+    
+    key= b'KQbcXhLfTiTi_EOo7yy87%YTz7Ll6YZ0'
+    cipher = AES.new(key, AES.MODE_CBC, bytes(iv, 'utf-8'))
+    decrypted = unpad(cipher.decrypt(ciphertext), 16)
+    return decrypted.decode()

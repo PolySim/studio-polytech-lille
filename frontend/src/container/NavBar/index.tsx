@@ -1,23 +1,19 @@
 import React, { useContext } from "react";
 import { NavBar } from "src/styled";
-import { ConnectionContext } from "src/context";
 import { Link } from "react-router-dom";
+import { ConnectionContext } from "src/context";
 
 export default function NavBarView(): JSX.Element {
-  const { setConnection } = useContext(ConnectionContext);
+  const { iv } = useContext(ConnectionContext);
   return (
     <NavBar>
       <div>
         <Link to="/">Home</Link>
         <Link to="/">Acceuil</Link>
       </div>
-      <div
-        onClick={() => {
-          setConnection(true);
-        }}
-      >
+      <a href={`https://portail.polytech-lille.fr/le-studio/?r=${iv}`}>
         Connexion
-      </div>
+      </a>
     </NavBar>
   );
 }

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import HeaderView from "src/component/Header";
 import FooterView from "src/component/Footer";
 import HomeView from "src/component/Home";
@@ -22,10 +22,27 @@ import LegalView from "src/component/legal";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
+  const [connected, setConnected] = useState<boolean>(false);
+  const [iv, setIv] = useState<string>("");
+
+  useEffect(() => {
+    const getRandomInt16Bytes: (max: number) => string = (max) => {
+      const getRandomInt: () => string = () =>
+        Math.floor(Math.random() * max).toString();
+      const r = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6].map((i) =>
+        getRandomInt()
+      );
+      return r.join("");
+    };
+
+    setIv((curr) => getRandomInt16Bytes(16));
+  }, []);
 
   return (
     <>
-      <ConnectionContext.Provider value={{ connection, setConnection }}>
+      <ConnectionContext.Provider
+        value={{ connection, setConnection, connected, setConnected, iv }}
+      >
         <HeaderView />
         <NavBarView />
         <Routes>

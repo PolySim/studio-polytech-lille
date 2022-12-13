@@ -1,6 +1,9 @@
 export type ConnectionContextType = {
   connection: boolean;
   setConnection: React.Dispatch<React.SetStateAction<boolean>>;
+  connected: boolean;
+  setConnected: React.Dispatch<React.SetStateAction<boolean>>;
+  iv: string;
 };
 
 export type InfoTeamType = Record<number, MemberType[]>;
