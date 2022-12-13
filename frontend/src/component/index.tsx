@@ -24,6 +24,7 @@ export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
   const [connected, setConnected] = useState<boolean>(false);
   const [iv, setIv] = useState<string>("");
+  const [rank, setRank] = useState<number>(0);
 
   useEffect(() => {
     const getRandomInt16Bytes: (max: number) => string = (max) => {
@@ -34,14 +35,21 @@ export default function App(): JSX.Element {
       );
       return r.join("");
     };
-
     setIv((curr) => getRandomInt16Bytes(16));
   }, []);
 
   return (
     <>
       <ConnectionContext.Provider
-        value={{ connection, setConnection, connected, setConnected, iv }}
+        value={{
+          connection,
+          setConnection,
+          connected,
+          setConnected,
+          iv,
+          rank,
+          setRank,
+        }}
       >
         <HeaderView />
         <NavBarView />

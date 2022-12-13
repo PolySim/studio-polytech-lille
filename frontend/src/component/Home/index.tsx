@@ -1,12 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { Home, Circle } from "src/styled";
 import ImageHomeView from "src/component/Home/Image";
 import CircleView from "src/component/Home/cercle";
+import { useSearchParams } from "react-router-dom";
+import getInfoConnected from "src/API/getInfoConnected";
+import { ConnectionContext } from "src/context";
 
 export default function HomeView(): JSX.Element {
   const listFourNumber: number[] = [1, 2, 3, 4];
   const [imageAsset, setImageAsset] = useState<number>(1);
-
+  const [searchParams] = useSearchParams();
+  const { iv, setConnected, setRank } = useContext(ConnectionContext);
   const onToggleClick = (add: boolean) => {
     if (add) {
       imageAsset === 4 ? setImageAsset(1) : setImageAsset(imageAsset + 1);
@@ -14,6 +18,17 @@ export default function HomeView(): JSX.Element {
       imageAsset === 1 ? setImageAsset(4) : setImageAsset(imageAsset - 1);
     }
   };
+
+  useEffect(() => {
+    async function getData() {
+      const data = await getInfoConnected(iv, searchParams.get("u") || "");
+      setConnected(true);
+      setRank((curr) => data.group);
+    }
+    if (searchParams.get("u") && iv !== "") {
+      getData();
+    }
+  }, [searchParams, iv]);
 
   useEffect(() => {
     const interval = setInterval(() => onToggleClick(true), 6000);

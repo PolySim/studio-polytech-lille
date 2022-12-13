@@ -587,7 +587,7 @@ def getNewsText(id: None):
             connection.close()
             print("MySQL connection is closed")
            
-           
+# Send Connection Information and Decrypt username           
 @application.route('/getUsername/<iv>')
 def getUsername(iv: None): 
     u = request.args.get('u')
@@ -602,4 +602,31 @@ def getUsername(iv: None):
     key= b'KQbcXhLfTiTi_EOo7yy87%YTz7Ll6YZ0'
     cipher = AES.new(key, AES.MODE_CBC, bytes(iv, 'utf-8'))
     decrypted = unpad(cipher.decrypt(ciphertext), 16)
-    return decrypted.decode()
+
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        SELECT group_id
+        FROM studio_user
+        LEFT JOIN user_user_group ON studio_user.id = user_user_group.user_id
+        WHERE username = %s;
+        """
+        cursor.execute(SQLrequest, (decrypted.decode(),))
+        result = cursor.fetchall()
+        if result[0][0] == None:
+            return flask.jsonify({'group' : 0})
+        else:
+            return flask.jsonify({'group' : result[0][0]})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

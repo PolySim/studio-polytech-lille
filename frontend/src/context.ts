@@ -7,4 +7,6 @@ export const ConnectionContext = React.createContext<ConnectionContextType>({
   connected: false,
   setConnected: () => {},
   iv: "",
+  rank: 0,
+  setRank: () => {},
 });

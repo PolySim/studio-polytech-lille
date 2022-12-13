@@ -4,6 +4,8 @@ export type ConnectionContextType = {
   connected: boolean;
   setConnected: React.Dispatch<React.SetStateAction<boolean>>;
   iv: string;
+  rank: number;
+  setRank: React.Dispatch<React.SetStateAction<number>>;
 };
 
 export type InfoTeamType = Record<number, MemberType[]>;
@@ -76,3 +78,7 @@ export type NewsInfoType = {
   title: string;
   text: string;
 }[];
+
+export type ConnectedType = {
+  group: number;
+};
