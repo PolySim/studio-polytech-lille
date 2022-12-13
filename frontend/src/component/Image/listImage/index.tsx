@@ -1,8 +1,9 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import { ListImage } from "src/styled";
 import BigImageView from "src/component/Image/bigImage";
 import CrossView from "src/component/Image/cross";
 import ArrowView from "src/component/Image/arrow";
+import { ConnectionContext } from "src/context";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -16,6 +17,7 @@ export default function JustListImageView({
 }): JSX.Element {
   const [imageClick, setImageClick] = useState<boolean>(false);
   const [imageView, setImageView] = useState<number>(-1);
+  const { connected } = useContext(ConnectionContext);
 
   const onToggleDisplay = (add: boolean) => {
     if (add) {
@@ -53,26 +55,46 @@ export default function JustListImageView({
   return (
     <>
       <ListImage>
-        {images.map((image, i) => (
-          <div
-            key={image.id}
-            onClick={() => {
-              setImageClick(true);
-              setImageView((curr) => i);
-            }}
-          >
-            <img
-              src={`${cleAPI}/getImage/${image.id}`}
-              alt={image.id.toString()}
-            />
-          </div>
-        ))}
+        {connected
+          ? images.map((image, i) => (
+              <div
+                key={image.id}
+                onClick={() => {
+                  setImageClick(true);
+                  setImageView((curr) => i);
+                }}
+              >
+                <img
+                  src={`${cleAPI}/getImage/${image.id}`}
+                  alt={image.id.toString()}
+                />
+              </div>
+            ))
+          : images.map((image, i) =>
+              image.secure === 0 ? (
+                <div
+                  key={image.id}
+                  onClick={() => {
+                    setImageClick(true);
+                    setImageView((curr) => i);
+                  }}
+                >
+                  <img
+                    src={`${cleAPI}/getImage/${image.id}`}
+                    alt={image.id.toString()}
+                  />
+                </div>
+              ) : (
+                <React.Fragment key={`${image.id}`} />
+              )
+            )}
       </ListImage>
       {imageClick ? (
         <BigImageView
           imageView={imageView}
           images={images}
           setImageClick={setImageClick}
+          connected
         />
       ) : (
         <></>

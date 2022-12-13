@@ -229,7 +229,7 @@ export const NavBar = styled.div`
     height: 100%;
   }
 
-  div:nth-of-type(2) {
+  > a {
     display: flex;
     align-items: center;
     justify-content: flex-end;
@@ -266,7 +266,7 @@ export const NavBar = styled.div`
 `;
 
 export const Connection = styled.div`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
@@ -305,6 +305,7 @@ export const Connection = styled.div`
       button {
         background-color: none;
         border: none;
+        outline: none;
         margin-left: auto;
         cursor: pointer;
       }
@@ -365,6 +366,11 @@ export const Connection = styled.div`
       justify-content: flex-end;
       padding: 15px;
       z-index: 100;
+
+      div {
+        display: flex;
+        align-items: center;
+      }
 
       /* Info Button */
 
@@ -1285,6 +1291,7 @@ export const ListVideo = styled.main`
   > div:nth-of-type(2) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 85%;
     margin-top: 24px;
 

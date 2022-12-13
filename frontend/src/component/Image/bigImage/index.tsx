@@ -7,6 +7,7 @@ export default function BigImageView({
   images,
   imageView,
   setImageClick,
+  connected,
 }: {
   images: {
     id: number;
@@ -14,14 +15,28 @@ export default function BigImageView({
   }[];
   imageView: number;
   setImageClick: React.Dispatch<React.SetStateAction<boolean>>;
+  connected: boolean;
 }): JSX.Element {
   return (
     <BigImage style={{ transform: `translateX(${imageView * -100}vw)` }}>
-      {images.map((image) => (
-        <div key={image.id}>
-          <img src={`${cleAPI}/getImage/${image.id}`} alt={`${image.id}`} />
-        </div>
-      ))}
+      {connected
+        ? images.map((image) => (
+            <div key={image.id}>
+              <img src={`${cleAPI}/getImage/${image.id}`} alt={`${image.id}`} />
+            </div>
+          ))
+        : images.map((image) =>
+            image.secure === 0 ? (
+              <div key={image.id}>
+                <img
+                  src={`${cleAPI}/getImage/${image.id}`}
+                  alt={`${image.id}`}
+                />
+              </div>
+            ) : (
+              <React.Fragment key={`${image.id}`} />
+            )
+          )}
     </BigImage>
   );
 }
