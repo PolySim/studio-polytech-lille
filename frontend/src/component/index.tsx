@@ -19,6 +19,7 @@ import ListVideoView from "src/container/Video";
 import VideoView from "src/container/Video/VideoView";
 import ListNewsView from "src/container/News";
 import LegalView from "src/component/legal";
+import AdminView from "src/component/Admin";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -56,6 +57,7 @@ export default function App(): JSX.Element {
         <Routes>
           <Route path="/*" element={<HomeView />} />
           <Route path="/legal" element={<LegalView />} />
+          <Route path="/admin" element={<AdminView />} />
           <Route path="/team" element={<TeamView />} />
           <Route path="/news" element={<ListNewsView />} />
           <Route path="/about" element={<AboutView />} />
