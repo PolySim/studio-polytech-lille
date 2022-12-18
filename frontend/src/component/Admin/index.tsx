@@ -1,5 +1,6 @@
 import React from "react";
 import { Admin } from "src/styled";
+import { Link } from "react-router-dom";
 
 export default function AdminView(): JSX.Element {
   return (
@@ -71,6 +72,7 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
             </div>
           </div>
         </div>
+
         <div>
           <div>
             <div>
@@ -89,11 +91,11 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
               <div>Raccourcis</div>
             </div>
             <div>
-              <div>
+              <Link to="/home">
                 <div></div>
                 <div>Retour site</div>
-              </div>
-              <div>
+              </Link>
+              <Link to="news">
                 <div>
                   <svg
                     x="0px"
@@ -114,8 +116,8 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
                   </svg>
                 </div>
                 <div>Nouvelle news</div>
-              </div>
-              <div>
+              </Link>
+              <Link to="album">
                 <div>
                   <svg
                     x="0px"
@@ -131,8 +133,8 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
                   </svg>
                 </div>
                 <div>Nouvel album</div>
-              </div>
-              <div>
+              </Link>
+              <Link to="video">
                 <div>
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -145,8 +147,8 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
                   </svg>
                 </div>
                 <div>Nouvelle vidéo</div>
-              </div>
-              <div>
+              </Link>
+              <Link to="document">
                 <div>
                   <svg
                     width={"48px"}
@@ -167,11 +169,11 @@ l1180 0 5 1065 c5 985 6 1067 22 1097 23 42 80 88 127 102 28 8 315 11 1027
                   </svg>
                 </div>
                 <div>Nouveau document</div>
-              </div>
-              <div>
+              </Link>
+              <Link to="paf">
                 <div></div>
                 <div>Nouveau PAF</div>
-              </div>
+              </Link>
             </div>
           </div>
           <div>
