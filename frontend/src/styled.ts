@@ -1843,6 +1843,73 @@ export const EditAlbum = styled.main`
       }
     }
   }
+
+  /* List Photo */
   > div:nth-of-type(2) {
+    width: 85%;
+    margin-bottom: 24px;
+    border: 1px solid #aaa;
+    border-radius: 4px;
+
+    /* Title */
+    > div:nth-of-type(1) {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      background-color: #ccc;
+      border-bottom: 1px solid #aaa;
+
+      /* SVG */
+      > div:nth-of-type(1) {
+        padding: 6px;
+        border-right: 1px solid #aaa;
+      }
+      /* Text */
+      > div:nth-of-type(2) {
+        padding-left: 12px;
+      }
+    }
+
+    /* Content */
+    > div:nth-of-type(2) {
+      display: flex;
+      padding: 15px 10px;
+
+      > div {
+        margin: 12px 24px;
+        padding: 6px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+
+        > img {
+          width: 160px;
+          height: 160px;
+          object-fit: cover;
+        }
+
+        > div {
+          display: flex;
+          justify-content: center;
+          margin-top: 12px;
+
+          > div:nth-of-type(1) {
+            padding: 6px 10px;
+            margin-right: 12px;
+            background-color: #bf1a2f;
+            border-radius: 4px;
+          }
+          > div:nth-of-type(2) {
+            padding: 6px 10px;
+            margin-right: 12px;
+            background-color: #f6ae2d;
+            border-radius: 4px;
+          }
+          > div:nth-of-type(3) {
+            padding: 6px 10px;
+            border-radius: 4px;
+          }
+        }
+      }
+    }
   }
 `;
