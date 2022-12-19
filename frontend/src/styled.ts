@@ -1872,47 +1872,64 @@ export const EditAlbum = styled.main`
 
     /* Content */
     > div:nth-of-type(2) {
-      display: flex;
       padding: 15px 10px;
 
-      > div {
-        margin: 12px 24px;
-        padding: 6px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+      > div:nth-of-type(1) {
+        display: flex;
+        flex-wrap: wrap;
 
-        > img {
-          width: 160px;
-          height: 160px;
-          object-fit: cover;
+        > div {
+          margin: 12px 24px;
+          padding: 6px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+
+          > img {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+          }
+
+          /* Button */
+          > div {
+            display: flex;
+            justify-content: center;
+            margin-top: 12px;
+
+            > div {
+              cursor: pointer;
+            }
+
+            > div:nth-of-type(1) {
+              padding: 6px 10px;
+              margin-right: 12px;
+              background-color: #bf1a2f;
+              border-radius: 4px;
+            }
+            > div:nth-of-type(2) {
+              padding: 6px 10px;
+              margin-right: 12px;
+              background-color: #f6ae2d;
+              border-radius: 4px;
+            }
+            > div:nth-of-type(3) {
+              padding: 6px 10px;
+              border-radius: 4px;
+            }
+          }
+        }
+      }
+
+      > div:nth-of-type(2) {
+        margin-top: 24px;
+        padding-left: 24px;
+
+        > div {
+          margin-left: 6px;
         }
 
-        /* Button */
-        > div {
-          display: flex;
-          justify-content: center;
-          margin-top: 12px;
-
-          > div {
-            cursor: pointer;
-          }
-
-          > div:nth-of-type(1) {
-            padding: 6px 10px;
-            margin-right: 12px;
-            background-color: #bf1a2f;
-            border-radius: 4px;
-          }
-          > div:nth-of-type(2) {
-            padding: 6px 10px;
-            margin-right: 12px;
-            background-color: #f6ae2d;
-            border-radius: 4px;
-          }
-          > div:nth-of-type(3) {
-            padding: 6px 10px;
-            border-radius: 4px;
-          }
+        input {
+          padding: 6px;
         }
       }
     }

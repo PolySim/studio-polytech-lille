@@ -630,3 +630,32 @@ def getUsername(iv: None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+# Get Album Information for edit
+@application.route('/admin/albumInfo/<id>')
+def getAdminAlbumInfo(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT id, cover_id, title, YEAR(date), MONTH(date), DAY(date)
+        FROM Album
+        WHERE id = %s;
+        """
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return result[0]
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+            
