@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { EditAlbum } from "src/styled";
 import { ListImageType } from "src/type";
@@ -16,6 +16,8 @@ export default function EditAlbumView(): JSX.Element {
       },
     ],
   });
+  const titleRef: any = useRef();
+  const dateRef: any = useRef();
 
   return (
     <EditAlbum>
@@ -48,24 +50,30 @@ export default function EditAlbumView(): JSX.Element {
                 defaultValue={title}
                 type="text"
                 placeholder="Indiquez le titre"
-                onChange={(e) => {
-                  setTitle((curr) => e.target.value);
-                }}
+                ref={titleRef}
               />
             </div>
             <div>
               <div>Date</div>
-              <input
-                defaultValue={date}
-                type="date"
-                onChange={(e) => {
-                  setDate((curr) => e.target.value);
-                }}
-              />
+              <input defaultValue={date} type="date" ref={dateRef} />
             </div>
             <div>
-              <div>Enregistrer</div>
-              <div>Annuler</div>
+              <div
+                onClick={() => {
+                  setTitle((curr) => titleRef.current.value);
+                  setDate((curr) => dateRef.current.value);
+                }}
+              >
+                Enregistrer
+              </div>
+              <div
+                onClick={() => {
+                  titleRef.current.value = title;
+                  dateRef.current.value = date;
+                }}
+              >
+                Annuler
+              </div>
             </div>
           </div>
         </div>
@@ -85,7 +93,46 @@ export default function EditAlbumView(): JSX.Element {
             </div>
             <div>Informations</div>
           </div>
-          <div></div>
+          <div>
+            <div>Indication pour l'export Lightroom</div>
+            <div>
+              <div>- Paramètres de fichier : Limiter la taille à 500K</div>
+              <div>
+                - Dimension de l'image
+                <div>
+                  Redimensionner la largeur et la hauteur : 1500 x 1500 pixels
+                </div>
+                <div>Résolution: 240 pixels par pouce</div>
+              </div>
+              <div>
+                - Application d'un filigrane
+                <div>Image: celle-ci</div>
+                <div>Opacité: 100</div>
+                <div>Taille: proportionnel, 14</div>
+                <div>Position: en bas à droite</div>
+              </div>
+            </div>
+            <div>Notes</div>
+            <div>
+              <div>
+                - Les photos apparaîtrons dans l'album dans l'ordre dans
+                lesquelles elles ont été envoyées. Si vous envoyé plusieurs
+                photo d'un coup, les photos les plus lourdes arriveront en
+                dernier.
+              </div>
+              <div>
+                - Les photos sont par défaut sécurisées, c'est à dire que seuls
+                les élèves connecté pourront les voirs. Pensez à rendre public
+                les photos où n'apparissent ni alcool, mousse ou élément pouvant
+                dégrader l'image de l'école.
+              </div>
+              <div>- Pensez à choisir une photo de couverture publique .</div>
+              <div>
+                - Toute suppression de photo est faite sans préavis et est
+                définitive, soyez prudent
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 

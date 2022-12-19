@@ -1698,10 +1698,12 @@ export const EditAlbum = styled.main`
     display: flex;
     justify-content: space-between;
     width: 85%;
+    margin-bottom: 24px;
 
     /* Create or Modify Album */
     > div:nth-of-type(1) {
       width: 45%;
+      height: fit-content;
       border: 1px solid #aaa;
       border-radius: 4px;
 
@@ -1777,6 +1779,7 @@ export const EditAlbum = styled.main`
             font-size: 18px;
             padding: 12px;
             border-radius: 4px;
+            cursor: pointer;
           }
 
           > div:nth-of-type(1) {
@@ -1803,7 +1806,7 @@ export const EditAlbum = styled.main`
         align-items: center;
         width: 100%;
         background-color: #ccc;
-        /* border-bottom: 1px solid #aaa; */
+        border-bottom: 1px solid #aaa;
 
         /* SVG */
         > div:nth-of-type(1) {
@@ -1813,6 +1816,29 @@ export const EditAlbum = styled.main`
         /* Text */
         > div:nth-of-type(2) {
           margin-left: 12px;
+        }
+      }
+
+      /* Content */
+      > div:nth-of-type(2) {
+        padding: 15px 10px;
+
+        > div {
+          margin-bottom: 24px;
+          font-size: 18px;
+          font-weight: bold;
+
+          > div {
+            margin-top: 12px;
+            padding-left: 12px;
+            font-size: 14px;
+            font-weight: normal;
+
+            > div {
+              padding-left: 24px;
+              margin-top: 12px;
+            }
+          }
         }
       }
     }
