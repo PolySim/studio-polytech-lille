@@ -1887,10 +1887,15 @@ export const EditAlbum = styled.main`
           object-fit: cover;
         }
 
+        /* Button */
         > div {
           display: flex;
           justify-content: center;
           margin-top: 12px;
+
+          > div {
+            cursor: pointer;
+          }
 
           > div:nth-of-type(1) {
             padding: 6px 10px;

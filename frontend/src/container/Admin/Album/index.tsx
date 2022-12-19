@@ -157,7 +157,13 @@ export default function EditAlbumView(): JSX.Element {
             <div key={image.id}>
               <img src={`${cleAPI}/getImage/${image.id}`} alt={`${image.id}`} />
               <div>
-                <div>
+                <div
+                  onClick={() => {
+                    setImages((curr) =>
+                      images.filter((imageList) => image.id !== imageList.id)
+                    );
+                  }}
+                >
                   <svg
                     x="0px"
                     y="0px"
@@ -175,7 +181,17 @@ export default function EditAlbumView(): JSX.Element {
                     </g>
                   </svg>
                 </div>
-                <div>
+                <div
+                  onClick={() => {
+                    setImages((curr) =>
+                      images.map((imageList) =>
+                        imageList.id === image.id
+                          ? { ...image, secure: image.secure === 0 ? 1 : 0 }
+                          : imageList
+                      )
+                    );
+                  }}
+                >
                   {image.secure === 1 ? (
                     <svg
                       x="0px"
@@ -207,6 +223,9 @@ export default function EditAlbumView(): JSX.Element {
                 <div
                   style={{
                     backgroundColor: image.id === cover ? "#214e34" : "#70e000",
+                  }}
+                  onClick={() => {
+                    setCover((curr) => image.id);
                   }}
                 >
                   <svg
