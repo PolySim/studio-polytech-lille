@@ -6,6 +6,7 @@ import json
 from Crypto.Util.Padding import unpad
 from Crypto.Cipher import AES
 import base64
+import os
 
 application = Flask(__name__)
 CORS(application, supports_credentials=True)
@@ -727,6 +728,68 @@ def updateSecure(id:None, secure: None):
         cursor.execute(request, (secure, id))
         connection.commit()
         return "Update finish"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+    
+# Upload Image        
+@application.route('/uploadImage/<id>', methods=['POST'])
+def uploadImage(id:None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        SELECT MAX(id)
+        FROM Photo;
+        """
+        cursor.execute(SQLrequest)
+        id_max = cursor.fetchall()[0][0]
+        image_files = request.files.getlist('images')
+        if image_files:
+            indice = 1
+            for image_file in image_files:
+                extension = image_file.filename.split('.')[-1]
+                image_file.save(os.path.join('web/album/' + id, str(id_max + indice) + '.' + extension))
+                SQLrequest = """
+                INSERT INTO Photo (id, album_id, secure, nbViews, extension, date) 
+                VALUES (%s, %s, 1, 0, %s, '2022-01-01')
+                """
+                cursor.execute(SQLrequest, (id_max + indice, id, extension))
+                connection.commit()
+                indice += 1
+        return flask.jsonify({'message' : 'Images téléchargées avec'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+    
+# Remove Image
+@application.route('/removeImage/<id>')
+def removeImage(id:None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = "SELECT album_id, extension FROM Photo WHERE id = %s"
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        try:
+            request = "DELETE FROM Photo WHERE id= %s"
+            cursor.execute(request, (id,))
+            connection.commit()
+            os.remove(os.path.join('web/album/' + str(result[0][0]) , id + '.' + result[0][1]))
+            return 'Image supprimée avec succès!'
+        except FileNotFoundError:
+            return 'Image introuvable.'
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(

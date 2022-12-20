@@ -17,6 +17,7 @@ export default function EditAlbumView(): JSX.Element {
   const [albumId, setAlbumId] = useState<number>(-1);
   const titleRef: any = useRef();
   const dateRef: any = useRef();
+  const [files, setFiles] = useState<any>();
 
   useEffect(() => {
     id ? setAlbumId((curr) => parseInt(id)) : setAlbumId((curr) => -1);
@@ -32,6 +33,29 @@ export default function EditAlbumView(): JSX.Element {
       getData();
     }
   }, [id]);
+
+  const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setFiles(event.target.files);
+  };
+
+  async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+
+    const formData = new FormData();
+    for (let i = 0; i < files.length; i++) {
+      formData.append("images", files[i]);
+    }
+    try {
+      const response = await fetch(`${cleAPI}/uploadImage/1`, {
+        method: "POST",
+        body: formData,
+      });
+      const result = await response.json();
+      console.log(result);
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
   return (
     <EditAlbum>
@@ -179,6 +203,7 @@ export default function EditAlbumView(): JSX.Element {
                 <div>
                   <div
                     onClick={() => {
+                      fetch(`${cleAPI}/removeImage/${image.id}`);
                       setImages((curr) =>
                         images.filter((imageList) => image.id !== imageList.id)
                       );
@@ -280,8 +305,20 @@ export default function EditAlbumView(): JSX.Element {
           </div>
           <div>
             <div>Sélectionner votre image</div>
-            <form action="/uploadImage" method="post">
-              <input type="file" name="image" multiple />
+            <form
+              method="post"
+              onSubmit={(e) => {
+                handleSubmit(e);
+              }}
+            >
+              <input
+                type="file"
+                name="image"
+                multiple
+                onChange={(e) => {
+                  handleChange(e);
+                }}
+              />
               <input type="submit" value="Télécharger" />
             </form>
           </div>
