@@ -644,7 +644,35 @@ def getAdminAlbumInfo(id: None):
         """
         cursor.execute(request, (id,))
         result = cursor.fetchall()
-        return result[0]
+        if result[0][4] < 10:
+            if result[0][5] < 10:
+                return {
+                'id' : result[0][0],
+                'cover_id' : result[0][1],
+                'title' : result[0][2],
+                'date' : str(result[0][3]) + '-0' + str(result[0][4]) + '-0' + str(result[0][5])
+            }
+            else:
+                return {
+                'id' : result[0][0],
+                'cover_id' : result[0][1],
+                'title' : result[0][2],
+                'date' : str(result[0][3]) + '-0' + str(result[0][4]) + '-' + str(result[0][5])
+            }
+        else:
+            if result[0][5] < 10:
+                return {
+                'id' : result[0][0],
+                'cover_id' : result[0][1],
+                'title' : result[0][2],
+                'date' : str(result[0][3]) + '-' + str(result[0][4]) + '-0' + str(result[0][5])
+            }
+            return {
+                'id' : result[0][0],
+                'cover_id' : result[0][1],
+                'title' : result[0][2],
+                'date' : str(result[0][3]) + '-' + str(result[0][4]) + '-' + str(result[0][5])
+            }
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
@@ -658,4 +686,56 @@ def getAdminAlbumInfo(id: None):
             connection.close()
             print("MySQL connection is closed")
             
+# Update Cover 
+@application.route('/updateCoverId/<id>/<cover>')
+def updateCoverId(id: None, cover: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        UPDATE Album
+        SET cover_id = %s
+        WHERE id = %s;
+        """
+        cursor.execute(request, (cover, id))
+        connection.commit()
+        return "Update finish"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
             
+# Update Secure
+@application.route('/updateSecure/<id>/<secure>')
+def updateSecure(id:None, secure: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        UPDATE Photo
+        SET secure = %s
+        WHERE id = %s;
+        """
+        cursor.execute(request, (secure, id))
+        connection.commit()
+        return "Update finish"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

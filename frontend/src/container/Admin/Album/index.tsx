@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { EditAlbum } from "src/styled";
+import getAdminAlbumInfo from "src/API/getAdminAlbumInfo";
+import getListImage from "src/API/getListImage";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -10,8 +12,6 @@ export default function EditAlbumView(): JSX.Element {
   const [date, setDate] = useState<string>("");
   const [images, setImages] = useState<{ id: number; secure: number }[]>([
     { id: 1, secure: 1 },
-    { id: 2, secure: 0 },
-    { id: 3, secure: 0 },
   ]);
   const [cover, setCover] = useState<number>(-1);
   const [albumId, setAlbumId] = useState<number>(-1);
@@ -20,6 +20,17 @@ export default function EditAlbumView(): JSX.Element {
 
   useEffect(() => {
     id ? setAlbumId((curr) => parseInt(id)) : setAlbumId((curr) => -1);
+    async function getData() {
+      const data = await getAdminAlbumInfo(parseInt(id || ""));
+      setTitle((curr) => data.title);
+      setDate((curr) => data.date);
+      setCover((curr) => data.cover_id);
+      const dataListImage = await getListImage(parseInt(id || ""));
+      setImages((curr) => dataListImage.images);
+    }
+    if (id) {
+      getData();
+    }
   }, [id]);
 
   return (
@@ -192,6 +203,9 @@ export default function EditAlbumView(): JSX.Element {
                   </div>
                   <div
                     onClick={() => {
+                      image.secure === 0
+                        ? fetch(`${cleAPI}/updateSecure/${image.id}/1`)
+                        : fetch(`${cleAPI}/updateSecure/${image.id}/0`);
                       setImages((curr) =>
                         images.map((imageList) =>
                           imageList.id === image.id
@@ -235,6 +249,7 @@ export default function EditAlbumView(): JSX.Element {
                         image.id === cover ? "#214e34" : "#70e000",
                     }}
                     onClick={() => {
+                      fetch(`${cleAPI}/updateCoverId/${albumId}/${image.id}`);
                       setCover((curr) => image.id);
                     }}
                   >

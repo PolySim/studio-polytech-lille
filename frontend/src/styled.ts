@@ -1877,6 +1877,7 @@ export const EditAlbum = styled.main`
       > div:nth-of-type(1) {
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
 
         > div {
           margin: 12px 24px;

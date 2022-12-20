@@ -82,3 +82,10 @@ export type NewsInfoType = {
 export type ConnectedType = {
   group: number;
 };
+
+export type AdminAlbumInfo = {
+  id: number;
+  cover_id: number;
+  title: string;
+  date: string;
+};
