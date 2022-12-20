@@ -802,3 +802,31 @@ def removeImage(id:None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+            
+# Create Album
+@application.route('/createAlbum/<id>')
+def createAlbum(id: None):
+    try:
+        title = request.args.get('title')
+        date = request.args.get('date')
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        INSERT INTO Album (id, cover_id, title, date, sended, published) 
+        VALUES (%s, 1, %s, %s, 1, 1)
+        """
+        cursor.execute(SQLrequest, (id, title, date))
+        connection.commit()
+        return "Album Create"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

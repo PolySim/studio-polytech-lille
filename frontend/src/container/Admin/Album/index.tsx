@@ -20,7 +20,6 @@ export default function EditAlbumView(): JSX.Element {
   const [files, setFiles] = useState<any>();
 
   useEffect(() => {
-    id ? setAlbumId((curr) => parseInt(id)) : setAlbumId((curr) => -1);
     async function getData() {
       const data = await getAdminAlbumInfo(parseInt(id || ""));
       setTitle((curr) => data.title);
@@ -30,6 +29,7 @@ export default function EditAlbumView(): JSX.Element {
       setImages((curr) => dataListImage.images);
     }
     if (id) {
+      setAlbumId((curr) => parseInt(id));
       getData();
     }
   }, [id]);
@@ -39,21 +39,23 @@ export default function EditAlbumView(): JSX.Element {
   };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
-    event.preventDefault();
+    if (title !== "") {
+      event.preventDefault();
 
-    const formData = new FormData();
-    for (let i = 0; i < files.length; i++) {
-      formData.append("images", files[i]);
-    }
-    try {
-      const response = await fetch(`${cleAPI}/uploadImage/1`, {
-        method: "POST",
-        body: formData,
-      });
-      const result = await response.json();
-      console.log(result);
-    } catch (error) {
-      console.error(error);
+      const formData = new FormData();
+      for (let i = 0; i < files.length; i++) {
+        formData.append("images", files[i]);
+      }
+      try {
+        const response = await fetch(`${cleAPI}/uploadImage/1`, {
+          method: "POST",
+          body: formData,
+        });
+        const result = await response.json();
+        console.log(result);
+      } catch (error) {
+        console.error(error);
+      }
     }
   }
 
@@ -89,17 +91,26 @@ export default function EditAlbumView(): JSX.Element {
                 type="text"
                 placeholder="Indiquez le titre"
                 ref={titleRef}
+                required
               />
             </div>
             <div>
               <div>Date</div>
-              <input defaultValue={date} type="date" ref={dateRef} />
+              <input defaultValue={date} type="date" ref={dateRef} required />
             </div>
             <div>
               <div
                 onClick={() => {
-                  setTitle((curr) => titleRef.current.value);
-                  setDate((curr) => dateRef.current.value);
+                  if (
+                    titleRef.current.value !== "" &&
+                    dateRef.current.value !== ""
+                  ) {
+                    fetch(
+                      `${cleAPI}/createAlbum/${albumId}?title=${titleRef.current.value}&date=${dateRef.current.value}`
+                    );
+                    setTitle((curr) => titleRef.current.value);
+                    setDate((curr) => dateRef.current.value);
+                  }
                 }}
               >
                 Enregistrer
