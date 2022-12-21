@@ -21,6 +21,7 @@ import ListNewsView from "src/container/News";
 import LegalView from "src/component/legal";
 import AdminView from "src/component/Admin";
 import EditAlbumView from "src/container/Admin/Album";
+import SelectAlbumView from "src/component/Admin/SelectAlbum";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -66,6 +67,10 @@ export default function App(): JSX.Element {
           <Route
             path="/admin/album"
             element={rank === 0 ? <HomeView /> : <EditAlbumView />}
+          />
+          <Route
+            path="/admin/selectAlbum"
+            element={rank === 0 ? <HomeView /> : <SelectAlbumView />}
           />
           <Route
             path="/admin/album/:id"

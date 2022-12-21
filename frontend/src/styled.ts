@@ -1542,9 +1542,11 @@ export const Admin = styled.main`
     padding-left: 24px;
     padding-top: 24px;
 
-    div {
+    div,
+    a {
       color: #ccc;
       margin-bottom: 24px;
+      text-decoration: none;
     }
   }
 

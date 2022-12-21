@@ -8,7 +8,7 @@ export default function AdminView(): JSX.Element {
       <div>
         <div>Acceuil</div>
         <div>News</div>
-        <div>Photos</div>
+        <Link to="selectAlbum">Photos</Link>
         <div>Vidéos</div>
         <div>Equipe</div>
         <div>Mails</div>

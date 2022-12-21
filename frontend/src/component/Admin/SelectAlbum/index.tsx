@@ -4,8 +4,9 @@ import { InfoAlbumType } from "src/type";
 import { Album } from "src/styled";
 import NavBarAlbumView from "src/component/Album/navBar";
 import ListAlbumView from "src/component/Album/listAlbum";
+import ListAlbumAdminView from "src/component/Admin/SelectAlbum/ListAlbum";
 
-export default function AlbumView(): JSX.Element {
+export default function SelectAlbumView(): JSX.Element {
   const [albums, setAlbums] = useState<InfoAlbumType>({});
   const [albumSelected, setAlbumSelected] = useState<string>("");
 
@@ -27,7 +28,7 @@ export default function AlbumView(): JSX.Element {
         setAlbumSelected={setAlbumSelected}
         years={Object.keys(albums).reverse()}
       />
-      <ListAlbumView listAlbum={albums[parseInt(albumSelected)]} />
+      <ListAlbumAdminView listAlbum={albums[parseInt(albumSelected)]} />
     </Album>
   );
 }
