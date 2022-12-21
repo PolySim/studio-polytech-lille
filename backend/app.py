@@ -817,6 +817,8 @@ def createAlbum(id: None, create: None):
             VALUES (%s, 1, %s, %s, 1, 1)
             """
             cursor.execute(SQLrequest, (id, title, date))
+            if not os.path.exists('web/album/' + id):
+                os.makedirs('web/album/' + id)
         else:
             SQLrequest = """
             UPDATE Album SET title = %s, date = %s WHERE id = %s
