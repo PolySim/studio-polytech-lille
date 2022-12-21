@@ -804,20 +804,52 @@ def removeImage(id:None):
             print("MySQL connection is closed")
             
 # Create Album
-@application.route('/createAlbum/<id>')
-def createAlbum(id: None):
+@application.route('/createAlbum/<id>/<create>')
+def createAlbum(id: None, create: None):
     try:
         title = request.args.get('title')
         date = request.args.get('date')
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
         cursor = connection.cursor()
-        SQLrequest = """
-        INSERT INTO Album (id, cover_id, title, date, sended, published) 
-        VALUES (%s, 1, %s, %s, 1, 1)
-        """
-        cursor.execute(SQLrequest, (id, title, date))
+        if create == '0':
+            SQLrequest = """
+            INSERT INTO Album (id, cover_id, title, date, sended, published) 
+            VALUES (%s, 1, %s, %s, 1, 1)
+            """
+            cursor.execute(SQLrequest, (id, title, date))
+        else:
+            SQLrequest = """
+            UPDATE Album SET title = %s, date = %s WHERE id = %s
+            """
+            cursor.execute(SQLrequest, (title, date, id))
         connection.commit()
         return "Album Create"
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+            
+# Send MAX album_id
+@application.route('/maxAlbumId')
+def maxAlbumId():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root', password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT MAX(id)
+        FROM Album;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return [result[0][0]]
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(

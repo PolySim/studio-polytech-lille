@@ -3,6 +3,7 @@ import { useParams } from "react-router-dom";
 import { EditAlbum } from "src/styled";
 import getAdminAlbumInfo from "src/API/getAdminAlbumInfo";
 import getListImage from "src/API/getListImage";
+import getMaxAlbumId from "src/API/getMaxAlbumId";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -28,9 +29,15 @@ export default function EditAlbumView(): JSX.Element {
       const dataListImage = await getListImage(parseInt(id || ""));
       setImages((curr) => dataListImage.images);
     }
+    async function getDataMaxAlbumId() {
+      const data = await getMaxAlbumId();
+      setAlbumId((curr) => data + 1);
+    }
     if (id) {
       setAlbumId((curr) => parseInt(id));
       getData();
+    } else {
+      getDataMaxAlbumId();
     }
   }, [id]);
 
@@ -105,9 +112,13 @@ export default function EditAlbumView(): JSX.Element {
                     titleRef.current.value !== "" &&
                     dateRef.current.value !== ""
                   ) {
-                    fetch(
-                      `${cleAPI}/createAlbum/${albumId}?title=${titleRef.current.value}&date=${dateRef.current.value}`
-                    );
+                    title === ""
+                      ? fetch(
+                          `${cleAPI}/createAlbum/${albumId}/0?title=${titleRef.current.value}&date=${dateRef.current.value}`
+                        )
+                      : fetch(
+                          `${cleAPI}/createAlbum/${albumId}/1?title=${titleRef.current.value}&date=${dateRef.current.value}`
+                        );
                     setTitle((curr) => titleRef.current.value);
                     setDate((curr) => dateRef.current.value);
                   }
