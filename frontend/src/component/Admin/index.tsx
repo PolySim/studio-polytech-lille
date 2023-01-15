@@ -9,7 +9,7 @@ export default function AdminView(): JSX.Element {
         <div>Acceuil</div>
         <div>News</div>
         <Link to="selectAlbum">Photos</Link>
-        <div>Vidéos</div>
+        <Link to="video">Vidéos</Link>
         <div>Equipe</div>
         <div>Mails</div>
         <div>Utilisateurs</div>

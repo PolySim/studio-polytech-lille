@@ -189,7 +189,7 @@ def getAlbumInformation():
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
                                              password='Simon_256')
         cursor = connection.cursor()
-        request = "SELECT id, cover_id, title, YEAR(date), MONTH(date) FROM Album WHERE published = 1;"
+        request = "SELECT id, cover_id, title, YEAR(date), MONTH(date) FROM Album WHERE published = 1 ORDER BY date DESC;"
         cursor.execute(request)
         result = cursor.fetchall()
         return flask.jsonify(sqlRequestToDict_Album(result))
@@ -920,3 +920,26 @@ def maxAlbumId():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+
+
+@application.route('/addImageVideo/<id>', methods=['POST'])
+def add_image_video(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        image_files = request.files.getlist('images')
+        if image_files:
+            extension = image_files[0].filename.split('.')[-1]
+            image_files[0].save(os.path.join('web/img/video', str(id) + '.' + extension))
+            SQLrequest = """
+                UPDATE Photo SET extension = %s WHERE id %s;
+                """
+            cursor.execute(SQLrequest, (extension, id))
+            connection.commit()
+        return flask.jsonify({'message': 'Images téléchargées avec succès'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response

@@ -1954,3 +1954,66 @@ export const EditAlbum = styled.main`
     }
   }
 `;
+
+export const AdminListVideo = styled.main`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: calc(100vh - 204px);
+  margin-top: 24px;
+`;
+
+export const CreateVideo = styled.div`
+  width: 85%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  > div:nth-of-type(1) {
+    padding: 15px;
+    background-color: #ddd;
+  }
+
+  > div:nth-of-type(2) {
+    display: flex;
+    padding: 15px;
+    > div:nth-of-type(1) {
+      width: calc(50% - 15px);
+      input {
+        margin: 6px 0 12px;
+        padding: 3px;
+        outline: none;
+        width: 85%;
+      }
+    }
+
+    > div:nth-of-type(2) {
+      display: flex;
+      flex-wrap: wrap;
+      width: calc(50% - 15px);
+      margin-top: 18px;
+
+      > div {
+        height: fit-content;
+        padding: 6px 12px;
+        background-color: #ddd;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        margin-right: 6px;
+        cursor: pointer;
+      }
+    }
+  }
+  > div:nth-of-type(3) {
+    padding: 6px 15px;
+    > div {
+      padding: 6px 12px;
+      background-color: #80cef0;
+      width: fit-content;
+      border: 1px solid #004977;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+  }
+  > div:nth-of-type(4) {
+    padding: 15px;
+  }
+`;
