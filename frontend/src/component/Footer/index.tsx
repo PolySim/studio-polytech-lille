@@ -15,7 +15,7 @@ export default function FooterView(): JSX.Element {
         <Link to="/about/contact">Contactez-nous</Link>
         <Link to="/about/history">L'histoire du studio</Link>
         <a href="https://www.instagram.com/le_studio_lille/?hl=fr">Instagram</a>
-        <p>Administration</p>
+        <Link to="/admin">Administration</Link>
       </div>
       <div>
         <Link to="/paf">Le PAF!</Link>

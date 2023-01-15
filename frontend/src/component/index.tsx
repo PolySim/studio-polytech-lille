@@ -19,12 +19,16 @@ import ListVideoView from "src/container/Video";
 import VideoView from "src/container/Video/VideoView";
 import ListNewsView from "src/container/News";
 import LegalView from "src/component/legal";
+import AdminView from "src/component/Admin";
+import EditAlbumView from "src/container/Admin/Album";
+import SelectAlbumView from "src/component/Admin/SelectAlbum";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
   const [connected, setConnected] = useState<boolean>(false);
   const [iv, setIv] = useState<string>("");
-  const [rank, setRank] = useState<number>(0);
+  // Default value 0 but for test
+  const [rank, setRank] = useState<number>(1);
 
   useEffect(() => {
     const getRandomInt16Bytes: (max: number) => string = (max) => {
@@ -52,10 +56,26 @@ export default function App(): JSX.Element {
         }}
       >
         <HeaderView />
-        <NavBarView />
+        {/* <NavBarView /> */}
         <Routes>
           <Route path="/*" element={<HomeView />} />
           <Route path="/legal" element={<LegalView />} />
+          <Route
+            path="/admin"
+            element={rank === 0 ? <HomeView /> : <AdminView />}
+          />
+          <Route
+            path="/admin/album"
+            element={rank === 0 ? <HomeView /> : <EditAlbumView />}
+          />
+          <Route
+            path="/admin/selectAlbum"
+            element={rank === 0 ? <HomeView /> : <SelectAlbumView />}
+          />
+          <Route
+            path="/admin/album/:id"
+            element={rank === 0 ? <HomeView /> : <EditAlbumView />}
+          />
           <Route path="/team" element={<TeamView />} />
           <Route path="/news" element={<ListNewsView />} />
           <Route path="/about" element={<AboutView />} />
