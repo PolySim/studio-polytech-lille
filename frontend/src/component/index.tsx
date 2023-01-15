@@ -56,7 +56,7 @@ export default function App(): JSX.Element {
         }}
       >
         <HeaderView />
-        <NavBarView />
+        {/* <NavBarView /> */}
         <Routes>
           <Route path="/*" element={<HomeView />} />
           <Route path="/legal" element={<LegalView />} />

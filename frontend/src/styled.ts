@@ -132,7 +132,7 @@ export const Home = styled.main`
   display: flex;
   position: relative;
   min-width: 100%;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   overflow-x: hidden;
   background-color: #101010;
 
@@ -451,7 +451,7 @@ export const About = styled.main`
   display: flex;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   width: 100%;
   font-size: 24px;
   color: #333;
@@ -524,7 +524,7 @@ export const About = styled.main`
 `;
 
 export const Goal = styled.main`
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   padding: 24px 60px;
   box-sizing: border-box;
 
@@ -560,6 +560,11 @@ export const Goal = styled.main`
       margin-bottom: 12px;
     }
   }
+
+  @media screen and (max-width: 930px) {
+    width: 100%;
+    padding: 24px 24px;
+  }
 `;
 
 export const History = styled.main`
@@ -567,7 +572,7 @@ export const History = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   width: 100%;
   box-sizing: border-box;
   padding: 24px 60px;
@@ -621,6 +626,14 @@ export const History = styled.main`
       }
     }
   }
+
+  @media screen and (max-width: 930px) {
+    width: 100%;
+    padding: 24px 12px;
+    > div {
+      width: 95%;
+    }
+  }
 `;
 
 export const Contact = styled.main`
@@ -628,7 +641,7 @@ export const Contact = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   width: 100%;
 
   h2 {
@@ -786,7 +799,7 @@ export const Team = styled.main`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
   width: 100%;
   padding: 24px 60px;
   box-sizing: border-box;
@@ -884,6 +897,8 @@ export const Team = styled.main`
   }
 
   @media screen and (max-width: 930px) {
+    width: 100%;
+    padding: 24px 12px;
     > div {
       width: 95%;
     }
@@ -910,6 +925,7 @@ export const Album = styled.main`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  min-height: calc(100vh - 180px);
   height: 100%;
 
   /* NavBar */
@@ -1242,7 +1258,7 @@ export const ListVideo = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 232px);
+  min-height: calc(100vh - 180px);
 
   /* Categories and Years */
   > div:nth-of-type(1) {
@@ -1337,7 +1353,7 @@ export const Video = styled.main`
   align-items: center;
   flex-direction: column;
   margin-bottom: 48px;
-  min-height: calc(100vh - 280px);
+  min-height: calc(100vh - 228px);
 
   > div:nth-of-type(1) {
     display: flex;
@@ -1692,7 +1708,7 @@ export const EditAlbum = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
-  min-height: calc(100vh - 256px);
+  min-height: calc(100vh - 204px);
   width: 100%;
   margin-top: 24px;
 
