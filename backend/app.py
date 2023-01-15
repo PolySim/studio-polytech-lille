@@ -943,3 +943,64 @@ def add_image_video(id: None):
         response = flask.make_response(
             "Dataset screen display unsuccessful...", 403)
         return response
+
+
+@application.route('/createVideo', methods=['POST'])
+def create_video():
+    try:
+        args = request.get_json()
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        INSERT INTO Video 
+        VALUE (%s, NULL, %s, %s, %s, 0, 0, NULL, 'jpeg', 0)
+        """
+        cursor.execute(SQLrequest, (args['id'], args['category'], args['title'], args['date']))
+        connection.commit()
+        SQLrequest = """
+        INSERT INTO VideoLink (video_id, link)
+        VALUES (%s, %s)
+        """
+        cursor.execute(SQLrequest, (args['id'], args['url'],))
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/maxVideoId')
+def max_video_id():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT MAX(id)
+        FROM Video;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return [int(result[0][0])]
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

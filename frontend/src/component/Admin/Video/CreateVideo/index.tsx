@@ -1,6 +1,7 @@
 import React, { useRef, useState, useEffect } from "react";
 import { CreateVideo } from "src/styled";
 import getVideoCategory from "src/API/getVideoCategory";
+import { getMaxVideoId } from "src/API/getVideoMaxId";
 import { VideoCategoryType } from "src/type";
 
 const cleAPI = process.env.REACT_APP_API_URL;
@@ -10,6 +11,7 @@ export default function CreateVideoView(): JSX.Element {
   const [categories, setCategories] = useState<VideoCategoryType>([]);
   const [title, setTitle] = useState<string>("");
   const [files, setFiles] = useState<any>();
+  const [videoId, setVideoId] = useState<number>(0);
   const titleRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
 
@@ -17,7 +19,8 @@ export default function CreateVideoView(): JSX.Element {
     async function getData() {
       const data = await getVideoCategory();
       setCategories((curr) => data);
-      console.log(data);
+      const maxId = await getMaxVideoId();
+      setVideoId((curr) => maxId[0] + 1);
     }
     if (categories.length === 0) {
       getData();
@@ -36,7 +39,7 @@ export default function CreateVideoView(): JSX.Element {
         formData.append("images", files[i]);
       }
       try {
-        const response = await fetch(`${cleAPI}/addImageVideo`, {
+        const response = await fetch(`${cleAPI}/addImageVideo/${videoId}`, {
           method: "POST",
           body: formData,
         });
@@ -61,15 +64,25 @@ export default function CreateVideoView(): JSX.Element {
         const newUrl = `[youtube]${urlList[urlList.length - 1]}[/youtube]`;
         const response = await fetch(`${cleAPI}/createVideo`, {
           method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
           body: JSON.stringify({
             title: titleRef.current.value,
             url: newUrl,
             category: categorySelected,
-            id: 0,
+            id: videoId,
+            date: new Date()
+              .toLocaleDateString()
+              .split("/")
+              .reverse()
+              .join("-"),
           }),
         });
         const result = await response.json();
         console.log(result);
+        titleRef.current.style.backgroundColor = "#80cef0";
+        urlRef.current.style.backgroundColor = "#80cef0";
       } catch (error) {
         console.error(error);
       }
