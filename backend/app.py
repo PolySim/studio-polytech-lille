@@ -1004,3 +1004,46 @@ def max_video_id():
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+
+
+def sql_request_to_list_all_videos(SQLRequest):
+    result = []
+    for video in SQLRequest:
+        result.append({
+            'id': video[0],
+            'category': video[1],
+            'title': video[2],
+            'date': str(video[3]) + '/' + str(video[4]) + '/' + str(video[5]),
+            'view': video[6],
+            'secure': video[7],
+            'extension': video[8]
+        })
+    return result
+
+
+@application.route('/getAllVideos')
+def get_all_videos():
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT Video.id, name, title, YEAR(date), MONTH(date), DAY(date), nbViews, secure, extension
+        FROM Video
+        JOIN VideoCategory ON Video.category_id = VideoCategory.id ORDER BY date DESC;
+        """
+        cursor.execute(request)
+        result = cursor.fetchall()
+        return flask.jsonify(sql_request_to_list_all_videos(result))
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")

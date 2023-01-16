@@ -2017,3 +2017,59 @@ export const CreateVideo = styled.div`
     padding: 15px;
   }
 `;
+
+export const AllVideo = styled.div`
+  margin-top: 48px;
+  width: 85%;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  > div {
+    display: flex;
+
+    > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      box-sizing: border-box;
+      padding: 15px;
+      border-bottom: 1px solid #ccc;
+      border-right: 1px solid #ccc;
+    }
+
+    > div:nth-of-type(1) {
+      width: 15%;
+      padding-left: 15px;
+    }
+    > div:nth-of-type(2) {
+      width: 22%;
+    }
+    > div:nth-of-type(3) {
+      width: 11%;
+    }
+    > div:nth-of-type(4) {
+      width: 9%;
+    }
+    > div:nth-of-type(5) {
+      width: 7%;
+    }
+    > div:nth-of-type(6) {
+      width: 19%;
+    }
+    > div:nth-of-type(7) {
+      width: 17%;
+      border-right: none;
+    }
+
+    img {
+      width: 90%;
+      height: auto;
+    }
+  }
+
+  > div:nth-of-type(1) {
+    background-color: #ddd;
+    /* padding: 15px; */
+    margin-top: 0;
+  }
+`;

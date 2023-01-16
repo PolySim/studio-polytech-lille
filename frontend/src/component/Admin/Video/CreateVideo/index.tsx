@@ -12,6 +12,7 @@ export default function CreateVideoView(): JSX.Element {
   const [title, setTitle] = useState<string>("");
   const [files, setFiles] = useState<any>();
   const [videoId, setVideoId] = useState<number>(0);
+  const [valid, setValid] = useState<boolean>(false);
   const titleRef = useRef<HTMLInputElement>(null);
   const urlRef = useRef<HTMLInputElement>(null);
 
@@ -57,7 +58,8 @@ export default function CreateVideoView(): JSX.Element {
       titleRef.current.value !== "" &&
       urlRef.current &&
       urlRef.current.value !== "" &&
-      categorySelected !== 0
+      categorySelected !== 0 &&
+      !valid
     ) {
       try {
         const urlList = urlRef.current.value.split("/");
@@ -81,11 +83,21 @@ export default function CreateVideoView(): JSX.Element {
         });
         const result = await response.json();
         console.log(result);
+        setValid((curr) => true);
         titleRef.current.style.backgroundColor = "#80cef0";
         urlRef.current.style.backgroundColor = "#80cef0";
       } catch (error) {
         console.error(error);
       }
+    }
+    if (valid && titleRef.current && urlRef.current) {
+      setValid((curr) => false);
+      titleRef.current.style.backgroundColor = "none";
+      urlRef.current.style.backgroundColor = "none";
+      titleRef.current.value = "";
+      urlRef.current.value = "";
+      setCategorySelected((curr) => 0);
+      setVideoId((curr) => curr + 1);
     }
   }
 
@@ -127,7 +139,7 @@ export default function CreateVideoView(): JSX.Element {
             handleCreate();
           }}
         >
-          Valider
+          {valid ? "Nouveau" : "Valider"}
         </div>
       </div>
       <div>
