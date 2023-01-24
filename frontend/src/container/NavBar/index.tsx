@@ -7,10 +7,10 @@ export default function NavBarView(): JSX.Element {
   const { iv } = useContext(ConnectionContext);
   return (
     <NavBar>
-      <div>
+      {/* <div>
         <Link to="/">Home</Link>
         <Link to="/">Acceuil</Link>
-      </div>
+      </div> */}
       <a href={`https://portail.polytech-lille.fr/le-studio/?r=${iv}`}>
         Connexion
       </a>

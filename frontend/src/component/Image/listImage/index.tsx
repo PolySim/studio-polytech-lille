@@ -4,6 +4,7 @@ import BigImageView from "src/component/Image/bigImage";
 import CrossView from "src/component/Image/cross";
 import ArrowView from "src/component/Image/arrow";
 import { ConnectionContext } from "src/context";
+import { MessageConnection } from "src/styled";
 
 const cleAPI = process.env.REACT_APP_API_URL;
 
@@ -54,6 +55,13 @@ export default function JustListImageView({
 
   return (
     <>
+      {connected ? (
+        <></>
+      ) : (
+        <MessageConnection>
+          Connectez vous pour plus de contenus
+        </MessageConnection>
+      )}
       <ListImage>
         {connected
           ? images.map((image, i) => (
@@ -93,8 +101,7 @@ export default function JustListImageView({
         <BigImageView
           imageView={imageView}
           images={images}
-          setImageClick={setImageClick}
-          connected
+          connected={connected}
         />
       ) : (
         <></>

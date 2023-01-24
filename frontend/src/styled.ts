@@ -8,6 +8,11 @@ export const Header = styled.header`
   width: 100%;
   height: 100px;
 
+  img {
+    height: 95px;
+    width: auto;
+  }
+
   > div {
     display: flex;
     flex-direction: column;
@@ -62,6 +67,8 @@ export const Header = styled.header`
 
   @media screen and (max-width: 930px) {
     color: #337ab7;
+    height: fit-content;
+    padding: 12px 6px;
 
     > div {
       width: fit-content;
@@ -1961,6 +1968,7 @@ export const AdminListVideo = styled.main`
   align-items: center;
   min-height: calc(100vh - 204px);
   margin-top: 24px;
+  margin-bottom: 48px;
 `;
 
 export const CreateVideo = styled.div`
@@ -2069,7 +2077,22 @@ export const AllVideo = styled.div`
 
   > div:nth-of-type(1) {
     background-color: #ddd;
-    /* padding: 15px; */
     margin-top: 0;
   }
+
+  > div:last-of-type {
+    > div {
+      border-bottom: none;
+    }
+  }
+`;
+
+export const MessageConnection = styled.div`
+  width: 50%;
+  border-radius: 4px;
+  background-color: #abc4a1;
+  padding: 12px 6px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: bold;
 `;
