@@ -38,9 +38,10 @@ export default function App(): JSX.Element {
       const r = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6].map((i) =>
         getRandomInt()
       );
+      console.log(r.join(""));
       return r.join("");
     };
-    setIv((curr) => getRandomInt16Bytes(16));
+    setIv((curr) => getRandomInt16Bytes(9));
   }, []);
 
   return (

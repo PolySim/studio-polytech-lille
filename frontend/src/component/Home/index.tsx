@@ -21,6 +21,7 @@ export default function HomeView(): JSX.Element {
 
   useEffect(() => {
     async function getData() {
+      console.log(iv);
       const data = await getInfoConnected(iv, searchParams.get("u") || "");
       setConnected(true);
       setRank((curr) => data.group);

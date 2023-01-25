@@ -632,20 +632,23 @@ def getNewsText(id: None):
 # Send Connection Information and Decrypt username           
 @application.route('/getUsername/<iv>')
 def getUsername(iv: None):
-    u = request.args.get('u')
-    username = ''
-    for letter in u:
-        if letter == ' ':
-            username += '+'
-        else:
-            username += letter
-    ciphertext = base64.b64decode(username)
-
-    key = b'KQbcXhLfTiTi_EOo7yy87%YTz7Ll6YZ0'
-    cipher = AES.new(key, AES.MODE_CBC, bytes(iv, 'utf-8'))
-    decrypted = unpad(cipher.decrypt(ciphertext), 16)
-
     try:
+        u = request.args.get('u')
+        print(u)
+        username = ''
+        for letter in u:
+            if letter == ' ':
+                username += '+'
+            else:
+                username += letter
+        ciphertext = base64.b64decode(username)
+        key = b'KQbcXhLfTiTi_EOo7yy87%YTz7Ll6YZ0'
+        cipher = AES.new(key, AES.MODE_CBC, bytes(iv, 'utf-8'))
+        try:
+            decrypted = unpad(cipher.decrypt(ciphertext), 16)
+        except:
+            return flask.jsonify({'group': 0})
+
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
                                              password='Simon_256')
         cursor = connection.cursor()
@@ -657,7 +660,7 @@ def getUsername(iv: None):
         """
         cursor.execute(SQLrequest, (decrypted.decode(),))
         result = cursor.fetchall()
-        if result[0][0] == None:
+        if len(result) == 0:
             return flask.jsonify({'group': 0})
         else:
             return flask.jsonify({'group': result[0][0]})
@@ -667,12 +670,12 @@ def getUsername(iv: None):
             "Dataset screen display unsuccessful...", 403)
         return response
 
-    finally:
+    #finally:
         # Close connection
-        if connection.is_connected():
-            cursor.close()
-            connection.close()
-            print("MySQL connection is closed")
+        #if connection and connection.is_connected():
+         #   cursor.close()
+          #  connection.close()
+           # print("MySQL connection is closed")
 
 
 # Get Album Information for edit
