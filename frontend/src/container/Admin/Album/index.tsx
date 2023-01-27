@@ -220,7 +220,7 @@ export default function EditAlbumView(): JSX.Element {
           <div>
             {images.map((image) =>
               image.id === -1 ? (
-                <React.Fragment key={-1} />
+                <React.Fragment key="-1" />
               ) : (
                 <div key={image.id}>
                   <img

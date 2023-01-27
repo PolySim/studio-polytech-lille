@@ -21,8 +21,9 @@ import LegalView from "src/component/legal";
 import AdminView from "src/component/Admin";
 import EditAlbumView from "src/container/Admin/Album";
 import SelectAlbumView from "src/component/Admin/SelectAlbum";
-import EditVideoView from "src/component/Admin/Video";
+import AdminVideoView from "src/component/Admin/Video";
 import NavBarView from "src/container/NavBar";
+import EditVideoView from "src/component/Admin/Video/EditVideo";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -38,7 +39,6 @@ export default function App(): JSX.Element {
       const r = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0, 1, 2, 3, 4, 5, 6].map((i) =>
         getRandomInt()
       );
-      console.log(r.join(""));
       return r.join("");
     };
     setIv((curr) => getRandomInt16Bytes(9));
@@ -80,6 +80,10 @@ export default function App(): JSX.Element {
           />
           <Route
             path="/admin/video"
+            element={rank === 0 ? <HomeView /> : <AdminVideoView />}
+          />
+          <Route
+            path="/admin/EditVideo/:id"
             element={rank === 0 ? <HomeView /> : <EditVideoView />}
           />
           <Route path="/team" element={<TeamView />} />

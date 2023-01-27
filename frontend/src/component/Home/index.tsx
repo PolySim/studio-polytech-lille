@@ -21,13 +21,21 @@ export default function HomeView(): JSX.Element {
 
   useEffect(() => {
     async function getData() {
-      console.log(iv);
-      const data = await getInfoConnected(iv, searchParams.get("u") || "");
-      setConnected(true);
-      setRank((curr) => data.group);
+      const data = await getInfoConnected(
+        localStorage.getItem("iv") || "",
+        searchParams.get("u") || ""
+      );
+      if (data.group === -1) {
+        console.log("connection failed");
+      } else {
+        setConnected(true);
+        setRank((curr) => data.group);
+      }
     }
     if (searchParams.get("u") && iv !== "") {
       getData();
+    } else if (iv !== "") {
+      localStorage.setItem("iv", iv);
     }
   }, [searchParams, iv]);
 

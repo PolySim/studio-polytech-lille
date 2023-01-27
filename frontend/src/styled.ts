@@ -69,6 +69,7 @@ export const Header = styled.header`
     color: #337ab7;
     height: fit-content;
     padding: 12px 6px;
+    width: calc(100vw - 12px);
 
     > div {
       width: fit-content;
@@ -228,6 +229,7 @@ export const NavBar = styled.div`
   background-color: #0f1218;
   box-sizing: border-box;
   border: 1px solid black;
+  justify-content: flex-end;
 
   div:nth-of-type(1) {
     display: flex;
@@ -252,7 +254,8 @@ export const NavBar = styled.div`
     }
   }
 
-  a {
+  a,
+  div {
     display: flex;
     align-items: center;
     margin-right: 24px;
@@ -938,6 +941,7 @@ export const Album = styled.main`
   /* NavBar */
   > div:nth-of-type(1) {
     display: flex;
+    justify-content: center;
     flex-wrap: wrap;
     width: 85%;
     height: fit-content;
@@ -965,6 +969,7 @@ export const Album = styled.main`
   > div:nth-of-type(2) {
     display: flex;
     flex-wrap: wrap;
+    justify-content: center;
     width: 85%;
     margin-bottom: 24px;
 
@@ -1015,6 +1020,7 @@ export const AlbumSelect = styled.main`
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-height: calc(100vh - 232px);
 
   > div:nth-of-type(1) {
     display: flex;
@@ -1071,16 +1077,17 @@ export const BigImage = styled.div`
   position: fixed;
   left: 0px;
   top: 0px;
-  height: 100vh;
+  min-height: 100%;
   background-color: rgba(0, 0, 0, 0.8);
   transition: transform 0.6s;
+  /* overflow-x: hidden; */
 
   div {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
-    width: 100vw;
+    min-height: 100vh;
+    min-width: 100vw;
 
     img {
       max-width: 100vw;
@@ -2031,6 +2038,8 @@ export const AllVideo = styled.div`
   width: 85%;
   border: 1px solid #ccc;
   border-radius: 4px;
+
+  > form,
   > div {
     display: flex;
 
@@ -2043,6 +2052,12 @@ export const AllVideo = styled.div`
       padding: 15px;
       border-bottom: 1px solid #ccc;
       border-right: 1px solid #ccc;
+      input,
+      select {
+        width: 90%;
+        padding: 3px 6px;
+        outline: none;
+      }
     }
 
     > div:nth-of-type(1) {
@@ -2059,14 +2074,50 @@ export const AllVideo = styled.div`
       width: 9%;
     }
     > div:nth-of-type(5) {
+      cursor: pointer;
       width: 7%;
     }
     > div:nth-of-type(6) {
       width: 19%;
     }
     > div:nth-of-type(7) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-around;
       width: 17%;
       border-right: none;
+
+      > a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #ffba08;
+        padding: 6px;
+        border-radius: 8px;
+      }
+
+      > div:nth-of-type(1) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 6px;
+        background-color: #29bf12;
+        border-radius: 8px;
+        cursor: pointer;
+        input {
+          display: none;
+        }
+      }
+
+      > div:nth-of-type(2) {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: #d00000;
+        border-radius: 8px;
+        cursor: pointer;
+        padding: 6px;
+      }
     }
 
     img {
@@ -2096,3 +2147,5 @@ export const MessageConnection = styled.div`
   font-size: 16px;
   font-weight: bold;
 `;
+
+export const EditVideo = styled.main``;

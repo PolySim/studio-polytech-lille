@@ -92,7 +92,7 @@ export type AdminAlbumInfo = {
 
 export type AllVideosType = {
   id: number;
-  category: string;
+  category: number;
   title: string;
   date: string;
   view: number;

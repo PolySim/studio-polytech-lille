@@ -634,7 +634,6 @@ def getNewsText(id: None):
 def getUsername(iv: None):
     try:
         u = request.args.get('u')
-        print(u)
         username = ''
         for letter in u:
             if letter == ' ':
@@ -646,8 +645,8 @@ def getUsername(iv: None):
         cipher = AES.new(key, AES.MODE_CBC, bytes(iv, 'utf-8'))
         try:
             decrypted = unpad(cipher.decrypt(ciphertext), 16)
-        except:
-            return flask.jsonify({'group': 0})
+        except  :
+            return flask.jsonify({'group': -1})
 
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
                                              password='Simon_256')
@@ -1031,13 +1030,70 @@ def get_all_videos():
                                              password='Simon_256')
         cursor = connection.cursor()
         request = """
-        SELECT Video.id, name, title, YEAR(date), MONTH(date), DAY(date), nbViews, secure, extension
+        SELECT Video.id, VideoCategory.id, title, YEAR(date), MONTH(date), DAY(date), nbViews, secure, extension
         FROM Video
         JOIN VideoCategory ON Video.category_id = VideoCategory.id ORDER BY date DESC;
         """
         cursor.execute(request)
         result = cursor.fetchall()
         return flask.jsonify(sql_request_to_list_all_videos(result))
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/updateVideoInfo', methods=['POST'])
+def update_video_information():
+    try:
+        args = request.get_json()
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        UPDATE Video 
+        SET title = %s, date = %s, category_id = %s
+        WHERE id = %s 
+        """
+        cursor.execute(SQLrequest, (args['title'], args['date'], args['category'], args['id']))
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/updateSecureVideo/<id>/<value>')
+def update_secure_video(id:None, value: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        UPDATE Video 
+        SET secure = %s
+        WHERE id = %s 
+        """
+        cursor.execute(SQLrequest, (value, id))
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
