@@ -23,7 +23,7 @@ import EditAlbumView from "src/container/Admin/Album";
 import SelectAlbumView from "src/component/Admin/SelectAlbum";
 import AdminVideoView from "src/component/Admin/Video";
 import NavBarView from "src/container/NavBar";
-import EditVideoView from "src/component/Admin/Video/EditVideo";
+import EditVideoLinkView from "src/component/Admin/Video/EditVideoLink";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
@@ -83,8 +83,8 @@ export default function App(): JSX.Element {
             element={rank === 0 ? <HomeView /> : <AdminVideoView />}
           />
           <Route
-            path="/admin/EditVideo/:id"
-            element={rank === 0 ? <HomeView /> : <EditVideoView />}
+            path="/admin/EditVideoLink/:id"
+            element={rank === 0 ? <HomeView /> : <EditVideoLinkView />}
           />
           <Route path="/team" element={<TeamView />} />
           <Route path="/news" element={<ListNewsView />} />
