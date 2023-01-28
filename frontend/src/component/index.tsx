@@ -30,7 +30,7 @@ export default function App(): JSX.Element {
   const [connected, setConnected] = useState<boolean>(false);
   const [iv, setIv] = useState<string>("");
   // Default value 0 but for test
-  const [rank, setRank] = useState<number>(1);
+  const [rank, setRank] = useState<number>(0);
 
   useEffect(() => {
     const getRandomInt16Bytes: (max: number) => string = (max) => {

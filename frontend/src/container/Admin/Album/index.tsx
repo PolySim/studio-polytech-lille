@@ -116,10 +116,12 @@ export default function EditAlbumView(): JSX.Element {
                   ) {
                     title === ""
                       ? fetch(
-                          `${cleAPI}/createAlbum/${albumId}/0?title=${titleRef.current.value}&date=${dateRef.current.value}`
+                          `${cleAPI}/createAlbum/${albumId}/0?title=${titleRef.current.value}&date=${dateRef.current.value}`,
+                          { method: "POST" }
                         )
                       : fetch(
-                          `${cleAPI}/createAlbum/${albumId}/1?title=${titleRef.current.value}&date=${dateRef.current.value}`
+                          `${cleAPI}/createAlbum/${albumId}/1?title=${titleRef.current.value}&date=${dateRef.current.value}`,
+                          { method: "POST" }
                         );
                     setTitle((curr) => titleRef.current.value);
                     setDate((curr) => dateRef.current.value);
