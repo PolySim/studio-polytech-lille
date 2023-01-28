@@ -10,7 +10,7 @@ export default function CreateVideoView(): JSX.Element {
   const [categorySelected, setCategorySelected] = useState<number>(0);
   const [categories, setCategories] = useState<VideoCategoryType>([]);
   const [title, setTitle] = useState<string>("");
-  const [files, setFiles] = useState<any>();
+  const [files, setFiles] = useState<FileList | null>();
   const [videoId, setVideoId] = useState<number>(0);
   const [valid, setValid] = useState<boolean>(false);
   const titleRef = useRef<HTMLInputElement>(null);
@@ -29,12 +29,12 @@ export default function CreateVideoView(): JSX.Element {
   }, []);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setFiles(event.target.files);
+    setFiles((curr) => event.target.files);
   };
 
   async function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (title !== "") {
+    if (title !== "" && files) {
       const formData = new FormData();
       for (let i = 0; i < files.length; i++) {
         formData.append("images", files[i]);

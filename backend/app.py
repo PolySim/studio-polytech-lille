@@ -932,13 +932,14 @@ def add_image_video(id: None):
         cursor = connection.cursor()
         image_files = request.files.getlist('images')
         if image_files:
-            extension = image_files[0].filename.split('.')[-1]
-            image_files[0].save(os.path.join('web/img/video', str(id) + '.' + extension))
-            SQLrequest = """
+            for image_file in image_files:
+                extension = image_file.filename.split('.')[-1]
+                image_file.save(os.path.join('web/img/video', str(id) + '.' + extension))
+                SQLrequest = """
                 UPDATE Photo SET extension = %s WHERE id %s;
                 """
-            cursor.execute(SQLrequest, (extension, id))
-            connection.commit()
+                cursor.execute(SQLrequest, (extension, id))
+                connection.commit()
         return flask.jsonify({'message': 'Images téléchargées avec succès'})
     except Exception as e:
         print(f"Failed with message: {str(e)}")
@@ -1080,7 +1081,7 @@ def update_video_information():
             print("MySQL connection is closed")
 
 
-@application.route('/updateSecureVideo/<id>/<value>')
+@application.route('/updateSecureVideo/<id>/<value>', methods=['POST'])
 def update_secure_video(id:None, value: None):
     try:
         connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
@@ -1106,3 +1107,208 @@ def update_secure_video(id:None, value: None):
             cursor.close()
             connection.close()
             print("MySQL connection is closed")
+
+
+@application.route('/deleteVideo/<id>', methods=['DELETE'])
+def delete_video(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        DELETE FROM VideoLink
+        WHERE video_id = %s
+        """
+        cursor.execute(request, (id,))
+        connection.commit()
+        request = """
+                DELETE FROM Video
+                WHERE id = %s
+                """
+        cursor.execute(request, (id,))
+        connection.commit()
+        return flask.jsonify({'result': 'successful'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+def sqlRequestToDict_VideoLinkAdmin(sqlResult):
+    result = {}
+    for link in sqlResult:
+        if result == {}:
+            result = {
+                'extension': link[0],
+                'linkInfo': [
+                    {
+                        'id': link[2],
+                        'link': link[1]
+                    }
+                ],
+                'maxLinkId': link[3]
+            }
+        else:
+            result['linkInfo'].append({
+                        'id': link[2],
+                        'link': link[1]
+                    })
+    return result
+
+
+@application.route('/videoLinkAdmin/<id>')
+def get_link_admin(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        SELECT extension, link, VideoLink.id, MAX(VideoLink.id), Video.id
+        FROM Video
+        JOIN VideoLink ON Video.id = VideoLink.video_id
+        GROUP BY VideoLink.id
+        HAVING Video.id = %s;
+        """
+        cursor.execute(request, (id,))
+        result = cursor.fetchall()
+        return flask.jsonify(sqlRequestToDict_VideoLinkAdmin(result))
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/deleteLink/<id>', methods=['DELETE'])
+def delete_link(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        request = """
+        DELETE FROM VideoLink
+        WHERE id = %s
+        """
+        cursor.execute(request, (id,))
+        connection.commit()
+        return flask.jsonify({'result': 'successful'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/updateVideoLink', methods=['POST'])
+def update_video_link():
+    try:
+        args = request.get_json()
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        UPDATE VideoLink 
+        SET link = %s
+        WHERE id = %s 
+        """
+        cursor.execute(SQLrequest, (args['link'], args['id']))
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/createVideoLink', methods=['POST'])
+def create_video_link():
+    try:
+        args = request.get_json()
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        SQLrequest = """
+        INSERT INTO VideoLink 
+        VALUES (%s, %s, %s)
+        """
+        cursor.execute(SQLrequest, (args['idLink'], args['idVideo'], args['link']))
+        connection.commit()
+        return flask.jsonify({'result': 'success'})
+    except Exception as e:
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+    finally:
+        # Close connection
+        if connection.is_connected():
+            cursor.close()
+            connection.close()
+            print("MySQL connection is closed")
+
+
+@application.route('/updateCoverVideo/<id>', methods=['POST'])
+def update_cover_video(id: None):
+    try:
+        connection = mysql.connector.connect(host='127.0.0.1', database='studio_prod', user='root',
+                                             password='Simon_256')
+        cursor = connection.cursor()
+        image_files = request.files.getlist('images')
+        print(image_files)
+        if image_files:
+
+            for image_file in image_files:
+                extension = image_file.filename.split('.')[-1]
+                image_file.save(os.path.join('web/img/video', id + '.' + extension))
+                SQLrequest = """
+                UPDATE Video
+                SET extension = %s 
+                WHERE id = %s
+                """
+                cursor.execute(SQLrequest, (extension, id))
+                connection.commit()
+        return flask.jsonify({'message': 'Images téléchargées avec'})
+    except Exception as e:
+        return flask.jsonify({'message': 'lose'})
+        print(f"Failed with message: {str(e)}")
+        response = flask.make_response(
+            "Dataset screen display unsuccessful...", 403)
+        return response
+
+
+
+
+
+
+

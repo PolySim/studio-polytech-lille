@@ -27,9 +27,18 @@ export default function AllVideoView(): JSX.Element {
     return dateList.join("-");
   };
 
-  const deleteVideo = (id: number) => {
-    setVideos((curr) => curr.filter((video) => video.id !== id));
-  };
+  async function deleteVideo(id: number) {
+    try {
+      const response = await fetch(`${cleAPI}/deleteVideo/${id}`, {
+        method: "DELETE",
+      });
+      const result = await response.json();
+      console.log(result);
+      setVideos((curr) => curr.filter((video) => video.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  }
 
   async function changeSecure(id: number, value: number) {
     try {

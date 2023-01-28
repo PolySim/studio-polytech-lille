@@ -99,3 +99,12 @@ export type AllVideosType = {
   secure: number;
   extension: string;
 }[];
+
+export type VideoLinkAdminType = {
+  extension: string;
+  linkInfo: {
+    id: number;
+    link: string;
+  }[];
+  maxLinkId: number;
+};
