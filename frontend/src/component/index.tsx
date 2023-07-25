@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import HeaderView from "src/component/Header";
 import FooterView from "src/component/Footer";
 import HomeView from "src/component/Home";
-import NavBarView from "src/container/NavBar";
 import ConnectionView from "src/container/connection";
 import { ConnectionContext } from "src/context";
 import { Routes, Route } from "react-router-dom";
@@ -22,13 +21,16 @@ import LegalView from "src/component/legal";
 import AdminView from "src/component/Admin";
 import EditAlbumView from "src/container/Admin/Album";
 import SelectAlbumView from "src/component/Admin/SelectAlbum";
+import AdminVideoView from "src/component/Admin/Video";
+import NavBarView from "src/container/NavBar";
+import EditVideoLinkView from "src/component/Admin/Video/EditVideoLink";
 
 export default function App(): JSX.Element {
   const [connection, setConnection] = useState<boolean>(false);
   const [connected, setConnected] = useState<boolean>(false);
   const [iv, setIv] = useState<string>("");
   // Default value 0 but for test
-  const [rank, setRank] = useState<number>(1);
+  const [rank, setRank] = useState<number>(0);
 
   useEffect(() => {
     const getRandomInt16Bytes: (max: number) => string = (max) => {
@@ -39,7 +41,7 @@ export default function App(): JSX.Element {
       );
       return r.join("");
     };
-    setIv((curr) => getRandomInt16Bytes(16));
+    setIv((curr) => getRandomInt16Bytes(9));
   }, []);
 
   return (
@@ -56,7 +58,7 @@ export default function App(): JSX.Element {
         }}
       >
         <HeaderView />
-        {/* <NavBarView /> */}
+        <NavBarView />
         <Routes>
           <Route path="/*" element={<HomeView />} />
           <Route path="/legal" element={<LegalView />} />
@@ -75,6 +77,14 @@ export default function App(): JSX.Element {
           <Route
             path="/admin/album/:id"
             element={rank === 0 ? <HomeView /> : <EditAlbumView />}
+          />
+          <Route
+            path="/admin/video"
+            element={rank === 0 ? <HomeView /> : <AdminVideoView />}
+          />
+          <Route
+            path="/admin/EditVideoLink/:id"
+            element={rank === 0 ? <HomeView /> : <EditVideoLinkView />}
           />
           <Route path="/team" element={<TeamView />} />
           <Route path="/news" element={<ListNewsView />} />

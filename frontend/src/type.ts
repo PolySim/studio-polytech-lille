@@ -89,3 +89,22 @@ export type AdminAlbumInfo = {
   title: string;
   date: string;
 };
+
+export type AllVideosType = {
+  id: number;
+  category: number;
+  title: string;
+  date: string;
+  view: number;
+  secure: number;
+  extension: string;
+}[];
+
+export type VideoLinkAdminType = {
+  extension: string;
+  linkInfo: {
+    id: number;
+    link: string;
+  }[];
+  maxLinkId: number;
+};

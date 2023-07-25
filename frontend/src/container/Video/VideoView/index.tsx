@@ -50,6 +50,7 @@ export default function VideoView(): JSX.Element {
                   key={i}
                   src={`https://www.youtube.com/embed/${link.slice(9, -10)}`}
                   title={links.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                 ></iframe>
               )
             )}

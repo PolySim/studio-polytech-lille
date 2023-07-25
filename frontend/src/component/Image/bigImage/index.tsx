@@ -6,7 +6,6 @@ const cleAPI = process.env.REACT_APP_API_URL;
 export default function BigImageView({
   images,
   imageView,
-  setImageClick,
   connected,
 }: {
   images: {
@@ -14,11 +13,15 @@ export default function BigImageView({
     secure: number;
   }[];
   imageView: number;
-  setImageClick: React.Dispatch<React.SetStateAction<boolean>>;
   connected: boolean;
 }): JSX.Element {
   return (
-    <BigImage style={{ transform: `translateX(${imageView * -100}vw)` }}>
+    <BigImage
+      style={{ transform: `translateX(${imageView * -100}vw)` }}
+      onClick={() => {
+        console.log(2);
+      }}
+    >
       {connected
         ? images.map((image) => (
             <div key={image.id}>

@@ -1,5 +1,6 @@
 import React from "react";
 import { Arrow } from "src/styled";
+import { useSwipeable } from "react-swipeable";
 
 export default function ArrowView({
   numberImage,
@@ -25,8 +26,19 @@ export default function ArrowView({
       }
     }
   };
+
+  const handlers = useSwipeable({
+    onSwiped: (eventData) => {
+      console.log(1);
+      if (eventData.dir === "Left") {
+        onToggleDisplay(true);
+      } else if (eventData.dir === "Right") {
+        onToggleDisplay(false);
+      }
+    },
+  });
   return (
-    <Arrow>
+    <Arrow {...handlers}>
       <button>
         <div onClick={() => onToggleDisplay(false)}>
           <svg width="50px" height="50px" viewBox="0 0 24 24">
