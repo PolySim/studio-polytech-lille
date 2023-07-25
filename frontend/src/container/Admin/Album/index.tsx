@@ -117,11 +117,27 @@ export default function EditAlbumView(): JSX.Element {
                     title === ""
                       ? fetch(
                           `${cleAPI}/createAlbum/${albumId}/0?title=${titleRef.current.value}&date=${dateRef.current.value}`,
-                          { method: "POST" }
+                          {
+                            credentials: "include",
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              title: titleRef.current.value,
+                              date: dateRef.current.value,
+                            }),
+                          }
                         )
                       : fetch(
                           `${cleAPI}/createAlbum/${albumId}/1?title=${titleRef.current.value}&date=${dateRef.current.value}`,
-                          { method: "POST" }
+                          {
+                            credentials: "include",
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify({
+                              title: titleRef.current.value,
+                              date: dateRef.current.value,
+                            }),
+                          }
                         );
                     setTitle((curr) => titleRef.current.value);
                     setDate((curr) => dateRef.current.value);

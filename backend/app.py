@@ -859,7 +859,7 @@ def removeImage(id: None):
 
 
 # Create Album
-@application.route('/createAlbum/<id>/<create>')
+@application.route('/createAlbum/<id>/<create>', methods=['POST'])
 def createAlbum(id: None, create: None):
     try:
         title = request.args.get('title')
@@ -881,7 +881,7 @@ def createAlbum(id: None, create: None):
             """
             cursor.execute(SQLrequest, (title, date, id))
         connection.commit()
-        return "Album Create"
+        return flask.jsonify({'success': 'successful'})
     except Exception as e:
         print(f"Failed with message: {str(e)}")
         response = flask.make_response(
